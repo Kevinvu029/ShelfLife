@@ -66,7 +66,8 @@ Community leaders will follow these Community Impact Guidelines in determining t
 
 **Community Impact**: Demonstrating a pattern of violation of community standards, including sustained inappropriate behavior, harassment of an individual, or aggression toward or disparagement of classes of individuals.
 
-**Consequence**: A permanent ban from any sort of public interaction within the community.
+**Consequence**: A permanent ban fro[Untitled Notebook.pdf](https://github.com/user-attachments/files/25580595/Untitled.Notebook.pdf)
+m any sort of public interaction within the community.
 
 ## Attribution
 
@@ -81,3 +82,4 @@ For answers to common questions about this code of conduct, see the FAQ at [http
 [Mozilla CoC]: https://github.com/mozilla/diversity
 [FAQ]: https://www.contributor-covenant.org/faq
 [translations]: https://www.contributor-covenant.org/translations
+[Oluwatimilehin's signature.pdf](https://github.com/user-attachments/files/25580607/Oluwatimilehin.s.signature.pdf)
