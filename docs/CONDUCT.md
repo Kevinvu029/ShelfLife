@@ -158,6 +158,9 @@ For answers to common questions about this code of conduct, see the FAQ at [http
 
 ## Signature
 
+<img width="993" height="417" alt="Untitled (Draft)" src="https://github.com/user-attachments/assets/e44af238-91c0-4ac8-92b8-d9e037671eb1" />
+
+
 [Oluwatimilehin's signature.pdf](https://github.com/user-attachments/files/25580607/Oluwatimilehin.s.signature.pdf)
 
 ![Signature](https://github.com/user-attachments/assets/097dfc23-6a5e-471f-943e-57d47c1856f5)
