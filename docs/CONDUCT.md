@@ -164,3 +164,4 @@ For answers to common questions about this code of conduct, see the FAQ at [http
 
 ![Angel_Lucario_Signature](https://github.com/user-attachments/assets/e8539432-1eb5-4e16-af9f-eed9d3cfdba4)
 
+![Nehemiah_speaks_signature](https://github.com/user-attachments/assets/a545896a-67e5-4f24-b0a1-a2321aacf1ec)
