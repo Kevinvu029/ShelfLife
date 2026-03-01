@@ -161,3 +161,6 @@ For answers to common questions about this code of conduct, see the FAQ at [http
 [Oluwatimilehin's signature.pdf](https://github.com/user-attachments/files/25580607/Oluwatimilehin.s.signature.pdf)
 
 ![Signature](https://github.com/user-attachments/assets/097dfc23-6a5e-471f-943e-57d47c1856f5)
+
+![Angel_Lucario_Signature](https://github.com/user-attachments/assets/e8539432-1eb5-4e16-af9f-eed9d3cfdba4)
+
