@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1020562674446",
+    "project_id": "shelf-life-ugqnhg",
+    "storage_bucket": "shelf-life-ugqnhg.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020562674446:android:1157682d0a95763b0afd5f",
+        "android_client_info": {
+          "package_name": "com.mycompany.shelflife"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDyZA9Q7VY0FHUUn8KCE2n9q0T4M_dzNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAhDtacc--efbHFXxoIaE9-1WCHTR3feCw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1020562674446</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.shelflife</string>
+	<key>PROJECT_ID</key>
+	<string>shelf-life-ugqnhg</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shelf-life-ugqnhg.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1020562674446:ios:9241ac2fe26d79d60afd5f</string>
+</dict>
+</plist>
