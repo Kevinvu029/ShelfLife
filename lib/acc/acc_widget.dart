@@ -135,6 +135,18 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
           ),
         ],
       ),
+      'textOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1170.0.ms,
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -1464,7 +1476,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                         obscureText: false,
                                                         decoration:
                                                             InputDecoration(
-                                                          labelText: 'Email',
+                                                          labelText: 'Email...',
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -2262,8 +2274,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                       EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100.0),
-                    child: Image.network(
-                      'https://picsum.photos/seed/185/600',
+                    child: Image.asset(
+                      'assets/images/Gemini_Generated_Image_i5ol7xi5ol7xi5ol-Picsart-BackgroundRemover.png',
                       width: 150.0,
                       fit: BoxFit.cover,
                     ),
@@ -2272,27 +2284,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(
-                    0.0,
-                    valueOrDefault<double>(
-                      () {
-                        if (MediaQuery.sizeOf(context).width <
-                            kBreakpointSmall) {
-                          return -0.6;
-                        } else if (MediaQuery.sizeOf(context).width >
-                            kBreakpointMedium) {
-                          return -0.8;
-                        } else if (MediaQuery.sizeOf(context).width >=
-                            kBreakpointLarge) {
-                          return -0.8;
-                        } else {
-                          return -0.64;
-                        }
-                      }(),
-                      0.0,
-                    )),
+                alignment: AlignmentDirectional(0.05, -0.73),
                 child: Text(
-                  'Hello World',
+                  'Hello, Welcome to ShelfLife',
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         font: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
@@ -2305,7 +2299,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                         fontStyle:
                             FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
-                ),
+                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
               ),
             ],
           ),
