@@ -168,7 +168,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         body: SafeArea(
           top: true,
           child: Stack(
@@ -194,8 +194,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                               maxWidth: 570.0,
                             ),
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: FlutterFlowTheme.of(context).secondary,
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 4.0,
@@ -223,10 +222,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                     child: TabBar(
                                       isScrollable: true,
                                       labelColor: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      unselectedLabelColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                          .secondaryBackground,
+                                      unselectedLabelColor: Color(0xB3FFFFFF),
                                       labelPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               32.0, 0.0, 32.0, 0.0),
@@ -278,7 +275,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                     .fontStyle,
                                           ),
                                       indicatorColor:
-                                          FlutterFlowTheme.of(context).primary,
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
                                       indicatorWeight: 3.0,
                                       tabs: [
                                         Tab(
@@ -345,6 +343,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                     .headlineMedium
                                                                     .fontStyle,
                                                           ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
                                                           fontSize: 28.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -385,6 +386,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                       .labelMedium
                                                                       .fontStyle,
                                                                 ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight: FlutterFlowTheme.of(
@@ -1003,7 +1007,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
 
                                                                 context
                                                                     .goNamedAuth(
-                                                                  HomePageWidget
+                                                                  ProfileCreationWidget
                                                                       .routeName,
                                                                   context
                                                                       .mounted,
@@ -1027,7 +1031,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                   'Get Started',
                                                               options:
                                                                   FFButtonOptions(
-                                                                width: 230.0,
+                                                                width: 279.6,
                                                                 height: 52.0,
                                                                 padding:
                                                                     EdgeInsetsDirectional
@@ -1045,7 +1049,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                             0.0),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .primary,
+                                                                    .alternate,
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
@@ -1059,8 +1063,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                             .titleSmall
                                                                             .fontStyle,
                                                                       ),
-                                                                      color: Colors
-                                                                          .white,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
                                                                       letterSpacing:
                                                                           0.0,
                                                                       fontWeight: FlutterFlowTheme.of(
@@ -1126,6 +1131,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                         .labelMedium
                                                                         .fontStyle,
                                                                   ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight: FlutterFlowTheme.of(
@@ -1405,6 +1413,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                     .headlineMedium
                                                                     .fontStyle,
                                                           ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FlutterFlowTheme.of(
@@ -1444,6 +1455,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                       .labelMedium
                                                                       .fontStyle,
                                                                 ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight: FlutterFlowTheme.of(
@@ -1510,7 +1524,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                 BorderSide(
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryBackground,
+                                                                  .alternate,
                                                               width: 2.0,
                                                             ),
                                                             borderRadius:
@@ -1815,15 +1829,15 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                             return;
                                                           }
 
-                                                          context.goNamedAuth(
-                                                              HomePageWidget
+                                                          context.pushNamedAuth(
+                                                              ProfileCreationWidget
                                                                   .routeName,
                                                               context.mounted);
                                                         },
                                                         text: 'Sign In',
                                                         options:
                                                             FFButtonOptions(
-                                                          width: 230.0,
+                                                          width: 279.62,
                                                           height: 52.0,
                                                           padding:
                                                               EdgeInsetsDirectional
@@ -1841,7 +1855,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                       0.0),
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primary,
+                                                              .alternate,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1858,8 +1872,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                           .titleSmall
                                                                           .fontStyle,
                                                                     ),
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
                                                                     letterSpacing:
                                                                         0.0,
                                                                     fontWeight: FlutterFlowTheme.of(
@@ -1919,6 +1934,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                         .labelMedium
                                                                         .fontStyle,
                                                                   ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight: FlutterFlowTheme.of(
@@ -2232,7 +2250,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                               BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .secondaryBackground,
+                                                                .alternate,
                                                             width: 2.0,
                                                           ),
                                                           borderRadius:
@@ -2276,7 +2294,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(100.0),
                     child: Image.asset(
                       'assets/images/Gemini_Generated_Image_i5ol7xi5ol7xi5ol-Picsart-BackgroundRemover.png',
-                      width: 150.0,
+                      width: 30.0,
+                      height: 30.0,
                       fit: BoxFit.cover,
                     ),
                   ).animateOnPageLoad(
@@ -2293,6 +2312,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                           fontStyle:
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         fontSize: 21.0,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w600,
