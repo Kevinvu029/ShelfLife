@@ -19,3 +19,24 @@ Out of the responses collected, “Suggesting recipes from ingredients I own” 
 
 **Team Action (if any):**   
 The team should prioritize building a strong recipe recommendation feature that uses the user’s existing food inventory to generate meal ideas. This system should make it easy for users to select ingredients they already have and quickly receive recipe suggestions that use those items. If integrated with an inventory tracking system, the app could also prioritize recipes that use ingredients that are close to expiring, helping users cook more efficiently and reduce food waste.
+
+
+## Observation 3
+Observation Statement:
+Most respondents believe their household wastes only a small amount of food, while a smaller but still notable group reported a moderate amount. Very few respondents reported a large amount, and some said almost none. This suggests that many users may not see food waste as extreme, but still experience enough waste for ShelfLife to provide value.
+
+**Supporting Data:**
+Out of 77 responses:
+
+46 said “A small amount”
+
+18 said “A moderate amount”
+
+10 said “Almost none”
+
+2 said “A large amount”
+
+1 said “I am not sure”
+
+**Team Action (if any):**
+Position ShelfLife as a tool that helps users reduce the small but recurring food waste they already experience, rather than focusing only on severe waste. Emphasize reminders, pantry tracking, and expiration awareness as simple ways to help users waste even less food.
