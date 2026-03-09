@@ -52,6 +52,7 @@ The most frequently reported cause of food waste among respondents is missing ex
 **Supporting Data:**
 
 When asked which causes food waste most often (multi-select), respondents submitted 92 total selections across all options. The most selected cause was "I miss expiration dates" with 20 selections (21.7%), followed by "Leftovers do not get eaten" with 18 selections (19.6%), and "Plans change and I do not cook in time" with 17 selections (18.5%). Together, these three causes represent nearly 60% of all selections. "I forget what food I already have" followed with 16 selections, "I buy too much food" with 12, and "I do not know what to make with ingredients I have" with 9. One respondent noted they waste food because "I ate too much so I just throw the leftover away," and only one respondent reported they do not waste food at all.
+
 **Team Action (if any):**
 
 The app should include expiration date alerts and push notifications to warn users when items are about to expire. A leftover tracking feature that lets users log cooked meals and set consumption reminders would directly address the second most common cause. Integrating a meal planning or recipe suggestion feature based on current inventory could also reduce waste from changed plans and uncertainty about what to cook.
