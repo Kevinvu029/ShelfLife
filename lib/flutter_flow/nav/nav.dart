@@ -93,6 +93,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: AccWidget.routeName,
           path: AccWidget.routePath,
           builder: (context, params) => AccWidget(),
+        ),
+        FFRoute(
+          name: ProfileCreationWidget.routeName,
+          path: ProfileCreationWidget.routePath,
+          builder: (context, params) => ProfileCreationWidget(),
+        ),
+        FFRoute(
+          name: FoodListWidget.routeName,
+          path: FoodListWidget.routePath,
+          builder: (context, params) => FoodListWidget(),
+        ),
+        FFRoute(
+          name: BarcodeWidget.routeName,
+          path: BarcodeWidget.routePath,
+          builder: (context, params) => BarcodeWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
