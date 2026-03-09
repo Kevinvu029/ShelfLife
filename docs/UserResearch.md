@@ -58,3 +58,17 @@ When asked which causes food waste most often (multi-select), respondents submit
 **Team Action (if any):**
 
 The app should include expiration date alerts and push notifications to warn users when items are about to expire. A leftover tracking feature that lets users log cooked meals and set consumption reminders would directly address the second most common cause. Integrating a meal planning or recipe suggestion feature based on current inventory could also reduce waste from changed plans and uncertainty about what to cook.
+
+
+
+
+**Observation 5**
+
+Observation Statement:
+While many respondents recognize that food waste occurs in their household, most currently rely on simple habits such as remembering items mentally or quickly checking their fridge before shopping. This suggests that the main barrier to solving food waste is not awareness, but the lack of a convenient and low-effort system that fits naturally into users’ routines.
+
+**Supporting Data:**
+Many survey respondents indicated that they manually check their fridge or pantry or rely on memory to track the food they have at home. Very few reported using any structured method such as lists, apps, or spreadsheets to track groceries or expiration dates. Additionally, several participants mentioned that they forget what ingredients they already own when grocery shopping or realize too late that items have expired. Even though 46 out of 77 respondents reported wasting only a small amount of food, the repeated reasons for waste—such as missed expiration dates, uneaten leftovers, and forgotten ingredients—suggest that these problems occur regularly. This pattern indicates that users are aware of the issue but lack a simple, convenient tool that integrates into their normal grocery and cooking habits.
+
+**Team Action (if any):**
+The ShelfLife app should focus on reducing friction and making food tracking effortless. Features such as quick item scanning, automatic expiration tracking, and fast recipe suggestions should require minimal user effort. The design should prioritize speed and simplicity so that users can update their inventory in seconds, making it more likely they will consistently use the app as part of their grocery and cooking routine.
