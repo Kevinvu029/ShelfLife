@@ -9,7 +9,7 @@ The majority of respondents reported being in the **18–24 age range**, and man
 **Team Action (if any):**  
 The team should focus on building a **simple and fast inventory tracking system** that allows users to quickly add groceries (such as barcode scanning or receipt scanning) and automatically track expiration dates. The interface should make it easy for users to see what food they already have before shopping so they avoid duplicate purchases and reduce food waste.
 
-##**Observation 2**
+##Observation 2
 
 **Observation Statement:**
 Most survey respondents said the most important feature ShelfLife could provide is suggesting recipes based on ingredients they already own. This indicates that users primarily want help turning the food they currently have into meals, which can make cooking easier, reduce food waste, and simplify meal planning. While other features such as tracking food inventory or reminding users before food expires are also valuable, recipe suggestions appear to be the single feature users care about most.
