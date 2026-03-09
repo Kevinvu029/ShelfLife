@@ -22,10 +22,11 @@ The team should prioritize building a strong recipe recommendation feature that 
 
 
 ## Observation 3
-Observation Statement:
+
+**Observation Statement:** 
 Most respondents believe their household wastes only a small amount of food, while a smaller but still notable group reported a moderate amount. Very few respondents reported a large amount, and some said almost none. This suggests that many users may not see food waste as extreme, but still experience enough waste for ShelfLife to provide value.
 
-**Supporting Data:**
+**Supporting Data:** 
 Out of 77 responses:
 
 46 said “A small amount”
@@ -38,5 +39,5 @@ Out of 77 responses:
 
 1 said “I am not sure”
 
-**Team Action (if any):**
+**Team Action (if any):** 
 Position ShelfLife as a tool that helps users reduce the small but recurring food waste they already experience, rather than focusing only on severe waste. Emphasize reminders, pantry tracking, and expiration awareness as simple ways to help users waste even less food.
