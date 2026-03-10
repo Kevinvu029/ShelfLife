@@ -52,6 +52,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             padding: EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,

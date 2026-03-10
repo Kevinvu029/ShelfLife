@@ -1080,8 +1080,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                 elevation: 3.0,
                                                                 borderSide:
                                                                     BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
                                                                   width: 1.0,
                                                                 ),
                                                                 borderRadius:
@@ -1889,8 +1890,9 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                           elevation: 3.0,
                                                           borderSide:
                                                               BorderSide(
-                                                            color: Colors
-                                                                .transparent,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
                                                             width: 1.0,
                                                           ),
                                                           borderRadius:
@@ -2289,13 +2291,13 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                 alignment: AlignmentDirectional(0.0, -1.1),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                      EdgeInsetsDirectional.fromSTEB(20.0, 50.0, 20.0, 20.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100.0),
                     child: Image.asset(
                       'assets/images/Gemini_Generated_Image_i5ol7xi5ol7xi5ol-Picsart-BackgroundRemover.png',
-                      width: 30.0,
-                      height: 30.0,
+                      width: 60.0,
+                      height: 60.0,
                       fit: BoxFit.cover,
                     ),
                   ).animateOnPageLoad(
