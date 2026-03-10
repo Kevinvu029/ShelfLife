@@ -136,7 +136,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                             borderRadius: 25.0,
                             borderWidth: 1.0,
                             buttonSize: 56.0,
-                            fillColor: FlutterFlowTheme.of(context).alternate,
+                            fillColor: FlutterFlowTheme.of(context).primary,
                             icon: Icon(
                               Icons.add,
                               color: Colors.white,

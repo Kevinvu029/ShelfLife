@@ -53,23 +53,27 @@ class _FoodListWidgetState extends State<FoodListWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Your Pantry',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      font: GoogleFonts.inter(
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                child: Text(
+                  'Your Pantry',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        font: GoogleFonts.inter(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        fontSize: 30.0,
+                        letterSpacing: 0.0,
                         fontWeight:
                             FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                         fontStyle:
                             FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      fontSize: 30.0,
-                      letterSpacing: 0.0,
-                      fontWeight:
-                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                    ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(10.0),
@@ -91,10 +95,13 @@ class _FoodListWidgetState extends State<FoodListWidget> {
               ),
               Align(
                 alignment: AlignmentDirectional(0.0, 0.95),
-                child: wrapWithModel(
-                  model: _model.navBarModel,
-                  updateCallback: () => safeSetState(() {}),
-                  child: NavBarWidget(),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                  child: wrapWithModel(
+                    model: _model.navBarModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: NavBarWidget(),
+                  ),
                 ),
               ),
             ],
