@@ -18,3 +18,7 @@
 
 - Firebase authentification automatically tracks how many users create an account / sign up.
 - This metric helps determine how many users weve gained over a certain amount of time, and if the amount of users is increasing or decreasing over time.
+
+### Daily Active Users 
+- The daily active users are tracked with firebase analytics.
+- DAU is important because it helps evaluate product growth, user engagement, and the effectiveness of features such as expiration reminders and recipe recommendations.
