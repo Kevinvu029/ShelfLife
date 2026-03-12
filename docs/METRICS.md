@@ -13,3 +13,8 @@
 - Retention is measured by checking if the same user opens the app again after **7 days and 30 days** from their initial signup date.
 - Firebase Analytics automatically records **user sessions** and **returning users**, which allows us to compare new users with returning users over time.
 - This metric helps determine whether users continue using ShelfLife to manage their groceries, track expiration dates, and receive recipe suggestions instead of abandoning the app after the first use.
+
+### Adoption
+
+- Firebase authentification automatically tracks how many users create an account / sign up.
+- This metric helps determine how many users weve gained over a certain amount of time, and if the amount of users is increasing or decreasing over time.
