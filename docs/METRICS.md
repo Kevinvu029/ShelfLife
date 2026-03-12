@@ -22,3 +22,11 @@
 ### Daily Active Users 
 - The daily active users are tracked with firebase analytics.
 - DAU is important because it helps evaluate product growth, user engagement, and the effectiveness of features such as expiration reminders and recipe recommendations.
+
+### Net Promoter Score (NPS):
+- The Net Promoter Score (NPS) is a key Happiness metric that asks users to rate their likelihood of recommending the app on a scale of 0 to 10.
+-	This is implemented by embedding a short in-app survey that prompts users after key interactions (e.g., after adding items or receiving an expiration reminder).
+-	Users are asked: “How likely are you to recommend ShelfLife to a friend or family member?” on a scale of 0–10.
+-	Responses are categorized as: Promoters (9–10), Passives (7–8), and Detractors (0–6). NPS = % Promoters − % Detractors.
+-	Survey results are collected via Firebase Analytics and analyzed to gauge overall user satisfaction and identify areas for improvement.
+
