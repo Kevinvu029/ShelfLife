@@ -189,13 +189,13 @@ Impact - High — core value of the app is preventing food waste.
 
 If reminders are sent earlier (e.g., 2 days before expiration instead of same-day), users will have more time to act, increasing food usage and reducing waste.
 
-## Experiment -
+## Experiment:
 
 Audience: 50% of active users who have ≥3 tracked items
 Control Group: Default reminder timing (same-day)
 Variant Group: Reminder sent 2 days before expiration
 
-## Variations -
+## Variations:
 
 A (Control): Same-day expiration reminder
 B (Variant): Reminder 2 days before expiration
