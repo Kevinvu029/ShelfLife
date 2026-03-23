@@ -62,15 +62,13 @@ Simple Diagram
 
 Version A:
 
-Add Food Screen
-----------------
-[Scan Barcode]
-[Scan Date]
-[Manual Entry]
+Add Food Screen:
+- [Scan Barcode]
+- [Scan Date]
+- [Manual Entry]
 
 Version B:
 
-Barcode Scanner Opens Immediately
-----------------
-[Scanning Screen]
-[Manual Entry Button]
+Barcode Scanner Opens Immediately:
+- [Scanning Screen]
+- [Manual Entry Button]
