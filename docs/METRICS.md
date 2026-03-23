@@ -39,3 +39,12 @@
 - This data is collected using Firebase Analytics and is used to measure how successfully users complete the main task in the Golden Path.
 - A higher CTR indicates that users are successfully completing the food entry process, while a lower CTR may indicate usability issues or confusion in the interface.
 
+### Average Number of Food Items Added Per Active User Per Day:
+- This is a Task Success and Engagement metric that measures how actively users are using the core feature of the ShelfLife app, which is adding food items to their pantry.
+- This is implemented by tracking each time a user successfully adds a food item to their pantry.
+- When a food item is successfully saved, a Firebase Analytics custom event is logged (e.g., food_item_added).
+- Firebase Analytics is also used to track Daily Active Users (DAU), which measures how many users use the app each day.
+- The metric is calculated as: Average Food Items Per Active User = (Total number of food items added in a day) ÷ (Number of daily active users).
+- This data is collected using Firebase Analytics and Firestore and is used to measure how much users are actually using the main feature of the app.
+- A higher value indicates that users are actively using the app to track their food, while a lower value may indicate that users are not regularly adding food items.
+
