@@ -1,6 +1,6 @@
 ### A/B Test Name: Barcode Scan vs Manual Entry First Screen
 
-##User Story Number:
+## User Story Number:
 US2 – Golden Path (Add Food Item)
 
 ## Metrics:
