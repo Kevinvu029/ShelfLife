@@ -204,7 +204,7 @@ B (Variant): Reminder 2 days before expiration
 
 ### A/B Test Name: Expiration Reminder Timing (Proactive vs Passive Alerts)
 ## User Story Number:
- US5 – Stay Updated (Expiration Notifications)
+ US5 – Other Features
 
 ## Metrics:
 This A/B test will measure the following HEART metrics:
