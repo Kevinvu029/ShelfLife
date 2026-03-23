@@ -199,3 +199,65 @@ Variant Group: Reminder sent 2 days before expiration
 
 A (Control): Same-day expiration reminder  
 B (Variant): Reminder 2 days before expiration  
+
+
+
+### A/B Test Name: Expiration Reminder Timing (Proactive vs Passive Alerts)
+## User Story Number:
+ US5 – Stay Updated (Expiration Notifications)
+
+## Metrics:
+This A/B test will measure the following HEART metrics:
+Retention – 7-day and 14-day user return rate
+Engagement – Notification click-through rate (CTR)
+Happiness – In-app rating after notification interaction
+Task Success – % of users who act on expiring items (use or remove food)
+
+## Hypothesis:
+If users receive proactive, timely expiration reminders (e.g., “Your milk expires tomorrow – use it now!”) instead of passive or generic notifications, then users will return to the app more frequently and engage more with their inventory, increasing retention.
+
+## What problem are we trying to solve? Its impact?
+Currently, users may forget about the app after adding food because reminders are either too generic or not urgent enough.
+This creates a drop-off in retention, since users don’t have a strong reason to come back daily. Without consistent reminders, users may stop using the app altogether.
+This is a critical issue because ShelfLife’s value depends on ongoing engagement over time, not just initial usage. If users don’t return, the app cannot help reduce food waste.
+
+## Experiment:
+We will use Firebase A/B Testing and Firebase Analytics.
+# Audience: All active users with at least one food item stored.
+Split:
+50% → Version A
+50% → Version B
+Firebase Analytics will track:
+notification_sent
+notification_opened
+app_open
+food_item_used
+food_item_removed
+We will compare:
+7-day retention rate
+Notification CTR
+Daily app opens per user
+Actions taken on expiring food
+Duration: 2 weeks
+
+## Variations:
+Version A (Control – Passive Alerts)
+Users receive a generic notification:
+“You have items expiring soon.”
+Sent once per day
+
+Version B (Experiment – Proactive Smart Alerts)
+Users receive personalized, time-sensitive notifications:
+Includes urgency + suggestion
+Sent at optimal times (morning / evening)
+Goal: Make reminders more actionable and increase return behavior.
+
+Simple Diagram
+Version A:
+Notification:
+You have items expiring soon → User opens app (optional)
+
+Version B:
+Notification:
+EX. Food expires soon→  User opens app → Takes action
+
