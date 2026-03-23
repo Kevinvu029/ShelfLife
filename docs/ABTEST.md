@@ -176,26 +176,26 @@ User adds food item → survey appears → user selects rating → optional feed
 
 ## Metrics:
 
-Happiness: User satisfaction with reminders (in-app feedback)
-Engagement: Notification open rate
-Adoption: % of users enabling notifications
-Retention: 7-day return rate
-Task Success: % of food used before expiration
+Happiness: User satisfaction with reminders (in-app feedback) 
+Engagement: Notification open rate 
+Adoption: % of users enabling notifications 
+Retention: 7-day return rate 
+Task Success: % of food used before expiration 
 
 ## Hypothesis:
 
-Problem - Users are not acting on expiration reminders, leading to food waste.
-Impact - High — core value of the app is preventing food waste.
+Problem - Users are not acting on expiration reminders, leading to food waste. 
+Impact - High — core value of the app is preventing food waste. 
 
 If reminders are sent earlier (e.g., 2 days before expiration instead of same-day), users will have more time to act, increasing food usage and reducing waste.
 
 ## Experiment:
 
-Audience: 50% of active users who have ≥3 tracked items
-Control Group: Default reminder timing (same-day)
-Variant Group: Reminder sent 2 days before expiration
+Audience: 50% of active users who have ≥3 tracked items 
+Control Group: Default reminder timing (same-day) 
+Variant Group: Reminder sent 2 days before expiration 
 
 ## Variations:
 
-A (Control): Same-day expiration reminder
-B (Variant): Reminder 2 days before expiration
+A (Control): Same-day expiration reminder 
+B (Variant): Reminder 2 days before expiration 
