@@ -30,3 +30,12 @@
 -	Responses are categorized as: Promoters (9–10), Passives (7–8), and Detractors (0–6). NPS = % Promoters − % Detractors.
 -	Survey results are collected via Firebase Analytics and analyzed to gauge overall user satisfaction and identify areas for improvement.
 
+### Click-Through Rate (CTR) for Golden Path Event:
+- The Click-Through Rate (CTR) is a Task Success metric that measures how many users complete a key action in the Golden Path, such as saving a food item after entering its information.
+- This is implemented by tracking user interactions with the Save Food button during the food entry process.
+- When a user reaches the food entry screen, a Firebase Analytics custom event is logged (e.g., food_entry_screen_view).
+- When the user clicks the Save Food button, another custom Firebase Analytics event is logged (e.g., save_food_click).
+- CTR is calculated as: CTR = (Number of Save Food button clicks) ÷ (Number of food entry screen views).
+- This data is collected using Firebase Analytics and is used to measure how successfully users complete the main task in the Golden Path.
+- A higher CTR indicates that users are successfully completing the food entry process, while a lower CTR may indicate usability issues or confusion in the interface.
+
