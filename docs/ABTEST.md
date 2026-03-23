@@ -72,3 +72,100 @@ Version B:
 Barcode Scanner Opens Immediately:
 - [Scanning Screen]
 - [Manual Entry Button]
+
+---
+
+## A/B Test Name: In-App Survey vs No Survey After Adding Food Item
+
+**User Story Number:** US4 – Golden Path (Add Food Item)
+
+---
+
+### Metrics
+
+This A/B test measures the following HEART metric:
+
+- Happiness – User satisfaction score (1–5 rating)  
+- Happiness – Percentage of users giving positive feedback  
+- Happiness – Survey response rate  
+- Happiness – User feedback comments  
+
+---
+
+### Hypothesis
+
+If users are shown a short in-app survey after adding a food item, then we will better understand user satisfaction because users can give feedback immediately after completing the main task while the experience is still fresh.
+
+---
+
+### What problem are we trying to solve? Its impact?
+
+Currently, the app does not have a way to directly measure how users feel about the experience of adding a food item. While we can track actions such as food items being added, this only shows behavior and not satisfaction.
+
+The problem is that we are missing feedback at the most important point in the user journey, which is after completing the Golden Path. Users successfully add a food item and then leave the app without providing any feedback. This is a bottleneck because we lose valuable insights at the moment when the user experience matters most.
+
+This problem has a high impact because adding food is the core feature of the app. If users are not satisfied with this process, they may stop using the app. Without feedback, the team cannot clearly identify what needs improvement, which can negatively affect engagement and retention.
+
+To narrow the problem, we focus specifically on what happens after a food item is added. The hypothesis is that users are not giving feedback because there is no prompt. By adding a simple in-app survey at this point, we can collect useful data about user satisfaction.
+
+---
+
+### Experiment
+
+We will use Firebase A/B Testing and Firebase Analytics to run this experiment.
+
+**Audience:**
+- Users who successfully add a food item
+
+**Traffic Allocation:**
+- 50% of users will see Version A (Control)
+- 50% of users will see Version B (Experiment)
+
+This split ensures a fair comparison between both groups.
+
+**Firebase Analytics Tracking:**
+
+- food item added  
+- survey shown  
+- survey submitted  
+- rating selected  
+
+**We will compare:**
+
+- Number of survey responses  
+- Average satisfaction rating  
+- Percentage of positive ratings  
+
+**Duration:**
+- The experiment will run for 1–2 weeks to collect enough data.
+
+**Rationale:**
+We target users right after they complete the Golden Path because this is when their experience is most recent and feedback will be most accurate.
+
+---
+
+### Variations
+
+#### Version A (Control)
+- User adds a food item  
+- No survey is shown  
+
+---
+
+#### Version B (Experiment)
+- User adds a food item  
+- A short in-app survey appears immediately after  
+
+**Example Survey:**
+- "How satisfied are you?" (1–5 rating)  
+- Optional feedback text box  
+
+---
+
+### Design Description
+
+Version A:
+User adds food item → no additional interaction  
+
+Version B:
+User adds food item → survey appears → user selects rating → optional feedback submitted  
