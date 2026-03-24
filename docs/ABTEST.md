@@ -261,3 +261,79 @@ Version B:
 Notification:
 EX. Food expires soon→  User opens app → Takes action
 
+## A/B Test Name: Onboarding Tutorial vs. No Tutorial After Profile Creation
+User Story Number: US1 – Account Creation / Sign In
+
+## Metrics
+This A/B test measures the following HEART metrics:
+
+Adoption – % of new users who add at least one food item within 24 hours of signing up
+Retention – 7-day user return rate
+Task Success – CTR for the Save Food button (Golden Path completion)
+Engagement – DAU among users who signed up in the test period
+
+
+## Hypothesis
+If new users are shown a short onboarding tutorial immediately after completing profile creation (name, photo, and birthday), then more users will successfully complete the Golden Path because they will arrive at the home screen already knowing what action to take, rather than having to discover it on their own.
+
+## What problem are we trying to solve? Its impact?
+Currently, after a user creates their account and fills in their profile, they are dropped onto the home screen with no guidance. At this point, the user has invested time in signing up and setting up their profile but has not yet experienced any core value from the app. If they do not understand what to do next, they are likely to leave without adding a single food item.
+This is a critical drop-off point in the conversion funnel. A user who completes sign-up and profile creation but never adds food has not experienced ShelfLife's core value. Without that first moment of engagement, retention drops significantly.
+The bottleneck is the transition from profile creation to first use. The single variable being tested is whether a brief tutorial at this exact moment — when the user is already engaged and mid-flow — increases the likelihood of them completing the Golden Path.
+
+## Experiment
+We will use Firebase A/B Testing and Firebase Analytics to run this experiment.
+Audience: New users only (first-time sign-ups during the test window). Returning users are excluded since they have already passed this step.
+Traffic Allocation:
+
+50% of new users → Version A (Control)
+50% of new users → Version B (Experiment)
+
+Firebase Analytics will track:
+
+profile_creation_complete
+onboarding_tutorial_shown
+onboarding_tutorial_skipped
+onboarding_tutorial_completed
+add_food_screen_view
+save_food_click
+food_item_added
+
+We will compare:
+
+% of new users who add a food item within 24 hours
+Golden Path completion rate (save_food_click)
+7-day retention rate
+Tutorial skip rate vs. completion rate (Version B only)
+
+Duration: 2 weeks to gather enough new sign-ups for statistical significance.
+
+Variations
+Version A (Control – No Tutorial)
+
+User completes profile creation (name, photo, birthday)
+App navigates directly to the home screen
+No guidance is provided
+
+
+Version B (Experiment – Onboarding Tutorial)
+
+User completes profile creation (name, photo, birthday)
+A 3-screen tutorial overlay appears before the home screen:
+
+Screen 1: "Welcome to ShelfLife – track everything in your fridge and pantry"
+Screen 2: "Add food by scanning a barcode or entering it manually"
+Screen 3: "We'll remind you before items expire so nothing goes to waste"
+
+
+A Skip button is available on every screen
+After Screen 3, an "Add Your First Item →" CTA navigates directly to the Add Food screen
+
+
+Design Description
+Version A:
+Sign up → Profile creation (name, photo, birthday) → Home screen
+Version B:
+Sign up → Profile creation (name, photo, birthday) → Tutorial Screen 1 → Tutorial Screen 2 → Tutorial Screen 3 → Add Food screen (via CTA) → Home screen
+
+This test isolates a single variable — the presence of an onboarding tutorial at the exact handoff point between profile setup and first use. The skip button also gives you a secondary insight: if users who complete the tutorial convert at a higher rate than those who skip it, that further validates the tutorial's value.
