@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShelfLife — Stop Letting Food Expire</title>
+  <meta name="description" content="ShelfLife is a mobile app that tracks your pantry's expiration dates using barcode scanning, so you never waste food again." />
+  <meta property="og:title" content="ShelfLife — Stop Letting Food Expire" />
+  <meta property="og:description" content="Scan barcodes, track expiry dates, and reduce food waste with ShelfLife." />
+  <meta property="og:image" content="app_launcher_icon.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="app_launcher_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Daruma+Drop+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary:   #462521;
+      --secondary: #8A6552;
+      --cream:     #FFE0B5;
+      --bg:        #F1F4F8;
+      --accent:    #CA2E55;
+      --success:   #249689;
+      --warning:   #F9CF58;
+      --error:     #FF5963;
+      --text:      #14181B;
+      --muted:     #57636C;
+      --white:     #FFFFFF;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(70,37,33,0.12);
+      --font-head: 'Daruma Drop One', cursive;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 5%;
+      background: rgba(255,224,181,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(138,101,82,0.2);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      border-radius: 8px;
+    }
+
+    .nav-logo span {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      padding: 80px 5% 80px;
+      background: var(--cream);
+      background-image: radial-gradient(circle, rgba(138,101,82,0.15) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--primary);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    .btn-primary { background: var(--primary); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero-icon-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-icon-wrap img {
+      width: 200px;
+      height: 200px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      border-radius: 28px;
+      box-shadow: var(--shadow), 0 0 0 6px rgba(70,37,33,0.08);
+    }
+
+    .pixel-bar {
+      display: flex;
+      width: 200px;
+      height: 20px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+    }
+
+    .pixel-bar span {
+      display: block;
+    }
+
+    .pixel-bar .seg-r { flex: 1; background: var(--error); }
+    .pixel-bar .seg-y { flex: 1; background: var(--warning); }
+    .pixel-bar .seg-g { flex: 1; background: var(--success); }
+
+    .pixel-bar-label {
+      display: flex;
+      justify-content: space-between;
+      width: 200px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── FEATURES ── */
+    #features {
+      padding: 80px 5%;
+      background: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: #FFF8F0;
+      border: 1px solid var(--secondary);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s;
+    }
+
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .mini-bar {
+      display: flex;
+      width: 100%;
+      height: 10px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 12px;
+      border: 1px solid rgba(70,37,33,0.2);
+    }
+
+    .mini-bar .seg-r { flex: 1; background: var(--error); }
+    .mini-bar .seg-y { flex: 1; background: var(--warning); }
+    .mini-bar .seg-g { flex: 2; background: var(--success); }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      padding: 80px 5%;
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    #how .section-header h2 { color: var(--cream); }
+    #how .section-header p  { color: rgba(255,224,181,0.7); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .step.visible { opacity: 1; transform: translateY(0); }
+
+    .step-num {
+      font-family: var(--font-head);
+      font-size: 3.5rem;
+      color: var(--warning);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--cream);
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: rgba(255,224,181,0.65);
+    }
+
+    /* ── SCREENSHOTS ── */
+    #screenshots {
+      padding: 80px 5%;
+      background: var(--bg);
+    }
+
+    .phones {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .phone-frame {
+      width: 200px;
+      height: 360px;
+      border: 3px solid var(--secondary);
+      border-radius: 28px;
+      background: var(--white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .phone-frame.visible { opacity: 1; transform: translateY(0); }
+
+    .phone-frame .phone-screen-icon {
+      font-size: 2.5rem;
+    }
+
+    .phone-frame .phone-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .phone-frame .phone-soon {
+      font-size: 0.7rem;
+      color: rgba(87,99,108,0.6);
+    }
+
+    /* ── TECH STACK ── */
+    #tech {
+      padding: 60px 5%;
+      background: var(--white);
+      text-align: center;
+    }
+
+    #tech h2 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 28px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .badge {
+      padding: 8px 20px;
+      border-radius: 50px;
+      background: var(--primary);
+      color: var(--cream);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── CTA ── */
+    #download {
+      padding: 80px 5%;
+      background: var(--accent);
+      text-align: center;
+    }
+
+    #download h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    #download p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      font-size: 1rem;
+    }
+
+    #download .btn-group {
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    #download .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    #download .btn-outline {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .github-link:hover { color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: var(--muted);
+      text-align: center;
+      padding: 28px 5%;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--cream); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 60px 5%;
+      }
+
+      .hero-text p { margin: 0 auto 36px; }
+      .btn-group { justify-content: center; }
+      .hero-visual { order: -1; }
+
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="app_launcher_icon.png" alt="ShelfLife" />
+    <span>ShelfLife</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#download">Download</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Stop Letting Food Expire.</h1>
+    <p>ShelfLife tracks your pantry's expiration dates so you always know what to use first — and never throw food away again.</p>
+    <div class="btn-group">
+      <a href="#" class="btn btn-primary">📱 App Store</a>
+      <a href="#" class="btn btn-outline">🤖 Google Play</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-icon-wrap">
+      <img src="app_launcher_icon.png" alt="ShelfLife App Icon" />
+    </div>
+    <div class="pixel-bar">
+      <span class="seg-r"></span>
+      <span class="seg-y"></span>
+      <span class="seg-g"></span>
+    </div>
+    <div class="pixel-bar-label">
+      <span>Expired</span>
+      <span>Expiring Soon</span>
+      <span>Fresh</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-header">
+    <h2>Everything You Need</h2>
+    <p>ShelfLife makes pantry management effortless, from scan to reminder.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📷</span>
+      <h3>Barcode Scanning</h3>
+      <p>Point your camera at any product barcode and ShelfLife instantly looks up the item's name and image — no typing required.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⏱️</span>
+      <h3>Expiry Tracking</h3>
+      <p>Color-coded status tells you at a glance what's fresh, expiring soon, or already past its date.</p>
+      <div class="mini-bar">
+        <span class="seg-r"></span>
+        <span class="seg-y"></span>
+        <span class="seg-g"></span>
+      </div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🗄️</span>
+      <h3>Pantry List</h3>
+      <p>Browse everything in your fridge and cupboards in one organized view, sorted and ready to act on.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <h3>Price Tracking</h3>
+      <p>Log what you paid for each item so you can see exactly how much food — and money — you're saving.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔍</span>
+      <h3>Product Lookup</h3>
+      <p>Powered by Open Food Facts and a custom product database so coverage is broad and constantly growing.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔐</span>
+      <h3>Secure Accounts</h3>
+      <p>Sign in with Email, Google, or Apple. Your pantry data syncs securely to the cloud via Firebase.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-header">
+    <h2>Three Simple Steps</h2>
+    <p>Adding items to your pantry takes seconds.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Scan or Search</h3>
+      <p>Use your phone's camera to scan a barcode, or search by name. Product info is pulled in automatically.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Set the Date</h3>
+      <p>Confirm the expiration date with the date picker and save the item to your pantry in one tap.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Stay Ahead</h3>
+      <p>ShelfLife flags items expiring within 7 days so you can use them before it's too late.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section id="screenshots">
+  <div class="section-header">
+    <h2>App Preview</h2>
+    <p>A clean, modern interface designed to get out of your way.</p>
+  </div>
+  <div class="phones">
+    <div class="phone-frame">
+      <div class="phone-screen-icon">🏠</div>
+      <div class="phone-label">Home</div>
+      <div class="phone-soon">Screenshot coming soon</div>
+    </div>
+    <div class="phone-frame">
+      <div class="phone-screen-icon">🗄️</div>
+      <div class="phone-label">Pantry List</div>
+      <div class="phone-soon">Screenshot coming soon</div>
+    </div>
+    <div class="phone-frame">
+      <div class="phone-screen-icon">📷</div>
+      <div class="phone-label">Barcode Scanner</div>
+      <div class="phone-soon">Screenshot coming soon</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <h2>Built With</h2>
+  <div class="badges">
+    <span class="badge">Flutter</span>
+    <span class="badge">Dart</span>
+    <span class="badge">Firebase</span>
+    <span class="badge">Open Food Facts</span>
+    <span class="badge">iOS</span>
+    <span class="badge">Android</span>
+    <span class="badge">Google Cloud Run</span>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="download">
+  <h2>Get ShelfLife</h2>
+  <p>Available soon on iOS and Android. Follow the project on GitHub.</p>
+  <div class="btn-group">
+    <a href="#" class="btn btn-primary">📱 App Store</a>
+    <a href="#" class="btn btn-outline">🤖 Google Play</a>
+  </div>
+  <a href="https://github.com/Kevinvu029/ShelfLife" class="github-link" target="_blank" rel="noopener">
+    ⭐ View on GitHub
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>ShelfLife &copy; 2026 &mdash; <a href="https://github.com/Kevinvu029/ShelfLife" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Scroll-reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.feature-card, .step, .phone-frame').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
