@@ -42,11 +42,11 @@ void main() async {
     ));
     await GoogleFonts.pendingFonts();
 
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
     await tester.tap(find.byKey(const ValueKey('acc_ufz2')));
     await tester.pump(kDoubleTapMinTime);
     await tester.tap(find.byKey(const ValueKey('acc_ufz2')));
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 5000));
     await tester.tap(find.byKey(const ValueKey('emailAddress_eqtz')));
     await tester.enterText(
         find.byKey(const ValueKey('emailAddress_eqtz')), 'poop2@email.com');
