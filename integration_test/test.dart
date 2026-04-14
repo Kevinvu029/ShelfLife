@@ -57,6 +57,7 @@ void main() async {
     await tester.enterText(
         find.byKey(const ValueKey('password_lsms')), '1234567');
     FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byKey(const ValueKey('Button_by2i')));
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     expect(find.byKey(const ValueKey('Text_9l9l')), findsWidgets);
