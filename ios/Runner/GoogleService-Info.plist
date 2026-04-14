@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>1020562674446-vnubglfbfons1tn34sfgussj696mbftp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1020562674446-vnubglfbfons1tn34sfgussj696mbftp</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1020562674446-4iokrvlqmesdbkrdckhtc69bjoc6n60r.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAhDtacc--efbHFXxoIaE9-1WCHTR3feCw</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mycompany.shelflife</string>
+	<string>com.uricsc305.shelflife</string>
 	<key>PROJECT_ID</key>
 	<string>shelf-life-ugqnhg</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1020562674446:ios:9241ac2fe26d79d60afd5f</string>
+	<string>1:1020562674446:ios:ed6ac00bef17f7d90afd5f</string>
 </dict>
 </plist>

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'list_food_widget.dart' show ListFoodWidget;
+import 'food_item_home_widget.dart' show FoodItemHomeWidget;
 import 'package:flutter/material.dart';
 
-class ListFoodModel extends FlutterFlowModel<ListFoodWidget> {
+class FoodItemHomeModel extends FlutterFlowModel<FoodItemHomeWidget> {
   @override
   void initState(BuildContext context) {}
 

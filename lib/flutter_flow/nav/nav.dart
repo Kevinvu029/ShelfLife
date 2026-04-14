@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -70,24 +71,22 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
+    GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : AccWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? entryPage ?? HomePageWidget()
+          : AccWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : AccWidget(),
-        ),
-        FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? entryPage ?? HomePageWidget()
+              : AccWidget(),
         ),
         FFRoute(
           name: AccWidget.routeName,
@@ -100,14 +99,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ProfileCreationWidget(),
         ),
         FFRoute(
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
+          builder: (context, params) => HomePageWidget(),
+        ),
+        FFRoute(
           name: FoodListWidget.routeName,
           path: FoodListWidget.routePath,
           builder: (context, params) => FoodListWidget(),
         ),
         FFRoute(
-          name: BarcodeWidget.routeName,
-          path: BarcodeWidget.routePath,
-          builder: (context, params) => BarcodeWidget(),
+          name: EditFoodDetailsWidget.routeName,
+          path: EditFoodDetailsWidget.routePath,
+          asyncParams: {
+            'foodDocParameter': getDoc(['foods'], FoodsRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditFoodDetailsWidget(
+            foodDocParameter: params.getParam(
+              'foodDocParameter',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: BarcodePageWidget.routeName,
+          path: BarcodePageWidget.routePath,
+          builder: (context, params) => BarcodePageWidget(),
+        ),
+        FFRoute(
+          name: SurveyPageWidget.routeName,
+          path: SurveyPageWidget.routePath,
+          builder: (context, params) => SurveyPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

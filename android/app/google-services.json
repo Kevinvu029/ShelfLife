@@ -12,7 +12,20 @@
           "package_name": "com.mycompany.shelflife"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1020562674446-4iokrvlqmesdbkrdckhtc69bjoc6n60r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.shelflife",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1020562674446-193momj3bk9r34gj6kortgdss1nagop4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCDyZA9Q7VY0FHUUn8KCE2n9q0T4M_dzNk"
@@ -20,7 +33,63 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020562674446-193momj3bk9r34gj6kortgdss1nagop4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1020562674446-b1fetg880bh8hedht1t6ag5j269ls69t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.shelflife"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020562674446:android:e9a0fdd83ed2dc5b0afd5f",
+        "android_client_info": {
+          "package_name": "com.uricsc305.shelflife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020562674446-bgeshvr4dgs8gta6hn4oci4lulv11he4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uricsc305.shelflife",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1020562674446-193momj3bk9r34gj6kortgdss1nagop4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDyZA9Q7VY0FHUUn8KCE2n9q0T4M_dzNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020562674446-193momj3bk9r34gj6kortgdss1nagop4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1020562674446-b1fetg880bh8hedht1t6ag5j269ls69t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.shelflife"
+              }
+            }
+          ]
         }
       }
     }

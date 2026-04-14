@@ -25,4 +25,10 @@ class FFAppState extends ChangeNotifier {
   set pageIndex(int value) {
     _pageIndex = value;
   }
+
+  int _numFoodAdded = 0;
+  int get numFoodAdded => _numFoodAdded;
+  set numFoodAdded(int value) {
+    _numFoodAdded = value;
+  }
 }
