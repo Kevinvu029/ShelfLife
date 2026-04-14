@@ -42,18 +42,18 @@ void main() async {
     ));
     await GoogleFonts.pendingFonts();
 
-    await tester.pumpAndSettle(const Duration(milliseconds: 10000));
-    await tester.tap(find.byKey(const ValueKey('acc_ufz2')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('login_kwgs')));
     await tester.pump(kDoubleTapMinTime);
-    await tester.tap(find.byKey(const ValueKey('acc_ufz2')));
-    await tester.pumpAndSettle(const Duration(milliseconds: 10000));
+    await tester.tap(find.byKey(const ValueKey('login_kwgs')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byKey(const ValueKey('emailAddress_eqtz')));
-    await tester.pumpAndSettle(const Duration(milliseconds: 10000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.enterText(
         find.byKey(const ValueKey('emailAddress_eqtz')), 'poop2@email.com');
     FocusManager.instance.primaryFocus?.unfocus();
     await tester.tap(find.byKey(const ValueKey('password_lsms')));
-    await tester.pumpAndSettle(const Duration(milliseconds: 10000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.enterText(
         find.byKey(const ValueKey('password_lsms')), '1234567');
     FocusManager.instance.primaryFocus?.unfocus();

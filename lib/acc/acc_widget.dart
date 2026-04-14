@@ -290,6 +290,7 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                               text: 'Create Account',
                                             ),
                                             Tab(
+                                              key: ValueKey('login_kwgs'),
                                               text: 'Log In',
                                             ),
                                           ],
