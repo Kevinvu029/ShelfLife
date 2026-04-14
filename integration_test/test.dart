@@ -42,7 +42,8 @@ void main() async {
     ));
     await GoogleFonts.pendingFonts();
 
-    await tester.tap(find.byKey(const ValueKey('login_kwgs')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.longPress(find.byKey(const ValueKey('login_kwgs')));
     await tester.tap(find.byKey(const ValueKey('emailAddress_eqtz')));
     await tester.enterText(
         find.byKey(const ValueKey('emailAddress_eqtz')), 'poop2@email.com');
@@ -81,6 +82,49 @@ void main() async {
       matching: find.byKey(const ValueKey('IconButton_5ds9')),
     ));
     expect(find.byKey(const ValueKey('Container_u0g7')), findsOneWidget);
+  });
+
+  testWidgets('missingFoodInfo', (WidgetTester tester) async {
+    _overrideOnError();
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: 'KV2@TESTING.MAIL', password: 'KV2TESTING');
+    await tester.pumpWidget(ChangeNotifierProvider(
+      create: (context) => FFAppState(),
+      child: MyApp(
+        entryPage: BarcodePageWidget(),
+      ),
+    ));
+    await GoogleFonts.pendingFonts();
+
+    await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+    await tester.enterText(
+        find.byKey(const ValueKey('itemNameField_iavf')), 'Muffin');
+    await tester.enterText(
+        find.byKey(const ValueKey('priceField_c0xx')), '8.00');
+    await tester.tap(find.byKey(const ValueKey('addFoodButton_5afu')));
+    expect(
+        find.text(
+            'PLEASE FILL OUT ALL SECTIONS AND SELECT A DATE BEFORE CLICKING \"Add Food!\"'),
+        findsWidgets);
+  });
+
+  testWidgets('US1 Account creation', (WidgetTester tester) async {
+    _overrideOnError();
+
+    await tester.pumpWidget(ChangeNotifierProvider(
+      create: (context) => FFAppState(),
+      child: const MyApp(),
+    ));
+    await GoogleFonts.pendingFonts();
+
+    await tester.enterText(
+        find.byKey(const ValueKey('emailAddress_Create_np8b')),
+        'new_user@gmail.com');
+    await tester.enterText(
+        find.byKey(const ValueKey('password_Create_1fci')), 'test123');
+    await tester.enterText(
+        find.byKey(const ValueKey('confirm_password_Create_vd6p')), 'test123');
+    await tester.tap(find.byKey(const ValueKey('Button_3r9y')));
   });
 }
 

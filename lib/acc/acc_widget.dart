@@ -421,6 +421,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                     .infinity,
                                                                 child:
                                                                     TextFormField(
+                                                                  key: ValueKey(
+                                                                      'emailAddress_Create_np8b'),
                                                                   controller: _model
                                                                       .emailAddressCreateTextController,
                                                                   focusNode: _model
@@ -592,6 +594,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                     .infinity,
                                                                 child:
                                                                     TextFormField(
+                                                                  key: ValueKey(
+                                                                      'password_Create_1fci'),
                                                                   controller: _model
                                                                       .passwordCreateTextController,
                                                                   focusNode: _model
@@ -787,6 +791,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                     .infinity,
                                                                 child:
                                                                     TextFormField(
+                                                                  key: ValueKey(
+                                                                      'confirm_password_Create_vd6p'),
                                                                   controller: _model
                                                                       .confirmPasswordCreateTextController,
                                                                   focusNode: _model
@@ -983,6 +989,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                                                             13.0),
                                                                 child:
                                                                     FFButtonWidget(
+                                                                  key: ValueKey(
+                                                                      'Button_3r9y'),
                                                                   onPressed:
                                                                       () async {
                                                                     logFirebaseEvent(
