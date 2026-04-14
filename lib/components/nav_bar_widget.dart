@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -80,16 +81,21 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     FlutterFlowIconButton(
+                      key: ValueKey('IconButton_5ds9'),
                       borderColor: Colors.transparent,
                       borderRadius: 30.0,
                       borderWidth: 1.0,
                       buttonSize: 50.0,
                       icon: Icon(
                         Icons.home_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         size: 28.0,
                       ),
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'NAV_BAR_COMP_home_rounded_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_to');
+
                         context.goNamed(
                           HomePageWidget.routeName,
                           extra: <String, dynamic>{
@@ -108,10 +114,13 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       buttonSize: 50.0,
                       icon: Icon(
                         Icons.list,
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         size: 24.0,
                       ),
                       onPressed: () async {
+                        logFirebaseEvent('NAV_BAR_COMP_list_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_to');
+
                         context.pushNamed(
                           FoodListWidget.routeName,
                           extra: <String, dynamic>{
@@ -131,6 +140,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         Align(
                           alignment: AlignmentDirectional(-0.05, 0.0),
                           child: FlutterFlowIconButton(
+                            key: ValueKey('IconButton_i0q3'),
                             borderColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                             borderRadius: 25.0,
@@ -143,8 +153,11 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                               size: 35.0,
                             ),
                             onPressed: () async {
+                              logFirebaseEvent('NAV_BAR_COMP_add_ICN_ON_TAP');
+                              logFirebaseEvent('IconButton_navigate_to');
+
                               context.goNamed(
-                                BarcodeWidget.routeName,
+                                BarcodePageWidget.routeName,
                                 extra: <String, dynamic>{
                                   '__transition_info__': TransitionInfo(
                                     hasTransition: true,
@@ -165,11 +178,22 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       fillColor: FlutterFlowTheme.of(context).alternate,
                       icon: Icon(
                         Icons.star,
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         size: 26.0,
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
+                      onPressed: () async {
+                        logFirebaseEvent('NAV_BAR_COMP_star_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_to');
+
+                        context.pushNamed(
+                          SurveyPageWidget.routeName,
+                          extra: <String, dynamic>{
+                            '__transition_info__': TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                            ),
+                          },
+                        );
                       },
                     ),
                     FlutterFlowIconButton(
@@ -178,12 +202,19 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       borderWidth: 1.0,
                       buttonSize: 50.0,
                       icon: Icon(
-                        Icons.person,
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        Icons.logout,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                         size: 26.0,
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
+                      onPressed: () async {
+                        logFirebaseEvent('NAV_BAR_COMP_logout_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_auth');
+                        GoRouter.of(context).prepareAuthEvent();
+                        await authManager.signOut();
+                        GoRouter.of(context).clearRedirectLocation();
+
+                        context.goNamedAuth(
+                            AccWidget.routeName, context.mounted);
                       },
                     ),
                   ],

@@ -1,4 +1,6 @@
-import '/components/list_food_widget.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/components/food_item_widget.dart';
 import '/components/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -27,6 +29,7 @@ class _FoodListWidgetState extends State<FoodListWidget> {
     super.initState();
     _model = createModel(context, () => FoodListModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'FoodList'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -46,65 +49,109 @@ class _FoodListWidgetState extends State<FoodListWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primary,
+        backgroundColor: FlutterFlowTheme.of(context).tertiary,
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                child: Text(
-                  'Your Pantry',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        font: GoogleFonts.inter(
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
+          child: Container(
+            decoration: BoxDecoration(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  child: Text(
+                    'Your Pantry',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          font: GoogleFonts.darumadropOne(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                          color: FlutterFlowTheme.of(context).primary,
+                          fontSize: 30.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w600,
                           fontStyle:
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        fontSize: 30.0,
-                        letterSpacing: 0.0,
-                        fontWeight:
-                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                        fontStyle:
-                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                      ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondary,
-                    borderRadius: BorderRadius.circular(14.0),
-                    shape: BoxShape.rectangle,
                   ),
+                ),
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: wrapWithModel(
-                      model: _model.listFoodModel,
-                      updateCallback: () => safeSetState(() {}),
-                      child: ListFoodWidget(),
+                    padding: EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondary,
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: StreamBuilder<List<FoodsRecord>>(
+                          stream: queryFoodsRecord(
+                            queryBuilder: (foodsRecord) => foodsRecord
+                                .where(
+                                  'user',
+                                  isEqualTo: currentUserReference,
+                                )
+                                .orderBy('expDate'),
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            List<FoodsRecord> listViewFoodsRecordList =
+                                snapshot.data!;
+
+                            return ListView.separated(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: listViewFoodsRecordList.length,
+                              separatorBuilder: (_, __) =>
+                                  SizedBox(height: 10.0),
+                              itemBuilder: (context, listViewIndex) {
+                                final listViewFoodsRecord =
+                                    listViewFoodsRecordList[listViewIndex];
+                                return FoodItemWidget(
+                                  key: Key(
+                                      'Keygbd_${listViewIndex}_of_${listViewFoodsRecordList.length}'),
+                                  foodDoc: listViewFoodsRecord,
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.0, 0.95),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
-                  child: wrapWithModel(
-                    model: _model.navBarModel,
-                    updateCallback: () => safeSetState(() {}),
-                    child: NavBarWidget(),
+                Align(
+                  alignment: AlignmentDirectional(0.0, 0.95),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                    child: wrapWithModel(
+                      model: _model.navBarModel,
+                      updateCallback: () => safeSetState(() {}),
+                      child: NavBarWidget(),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
