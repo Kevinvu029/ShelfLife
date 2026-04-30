@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'barcode_page_widget.dart' show BarcodePageWidget;
 import 'package:flutter/material.dart';
 

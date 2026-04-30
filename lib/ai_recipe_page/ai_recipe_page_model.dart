@@ -1,18 +1,22 @@
-import '/backend/backend.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/components/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'ai_recipe_page_widget.dart' show AiRecipePageWidget;
 import 'package:flutter/material.dart';
 
-class HomePageModel extends FlutterFlowModel<HomePageWidget> {
+class AiRecipePageModel extends FlutterFlowModel<AiRecipePageWidget> {
   ///  Local state fields for this page.
 
-  DocumentReference? deleteFood;
+  dynamic recipeText;
+
+  dynamic recipeData;
+
+  bool buttonPressed = false;
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Firestore Query - Query a collection] action in HomePage widget.
-  List<FoodsRecord>? expiredItems;
+  // Stores action output result for [Backend Call - API (getRecipeSuggestionVTwo)] action in Button widget.
+  ApiCallResponse? recipeAPIOutput;
   // Model for NavBar component.
   late NavBarModel navBarModel;
 

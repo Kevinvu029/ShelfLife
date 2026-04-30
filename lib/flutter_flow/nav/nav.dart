@@ -99,16 +99,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => ProfileCreationWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
-          name: FoodListWidget.routeName,
-          path: FoodListWidget.routePath,
-          builder: (context, params) => FoodListWidget(),
-        ),
-        FFRoute(
           name: EditFoodDetailsWidget.routeName,
           path: EditFoodDetailsWidget.routePath,
           asyncParams: {
@@ -122,14 +112,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
+          name: SurveyPageWidget.routeName,
+          path: SurveyPageWidget.routePath,
+          builder: (context, params) => SurveyPageWidget(),
+        ),
+        FFRoute(
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
+          builder: (context, params) => HomePageWidget(),
+        ),
+        FFRoute(
+          name: FoodListWidget.routeName,
+          path: FoodListWidget.routePath,
+          builder: (context, params) => FoodListWidget(),
+        ),
+        FFRoute(
           name: BarcodePageWidget.routeName,
           path: BarcodePageWidget.routePath,
           builder: (context, params) => BarcodePageWidget(),
         ),
         FFRoute(
-          name: SurveyPageWidget.routeName,
-          path: SurveyPageWidget.routePath,
-          builder: (context, params) => SurveyPageWidget(),
+          name: EditProfilePageWidget.routeName,
+          path: EditProfilePageWidget.routePath,
+          builder: (context, params) => EditProfilePageWidget(),
+        ),
+        FFRoute(
+          name: AiRecipePageWidget.routeName,
+          path: AiRecipePageWidget.routePath,
+          builder: (context, params) => AiRecipePageWidget(),
+        ),
+        FFRoute(
+          name: UserSettingsWidget.routeName,
+          path: UserSettingsWidget.routePath,
+          builder: (context, params) => UserSettingsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

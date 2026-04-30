@@ -79,6 +79,62 @@ class OpenFoodFactsCall {
       ));
 }
 
+class GetRecipeSuggestionCall {
+  static Future<ApiCallResponse> call({
+    String? uid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "uid": "${escapeStringForJson(uid)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getRecipeSuggestion',
+      apiUrl: 'https://getsuggestedrecipes-3sf3lmsvra-uc.a.run.app',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetRecipeSuggestionVTwoCall {
+  static Future<ApiCallResponse> call({
+    String? uid = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "uid": "${escapeStringForJson(uid)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getRecipeSuggestionVTwo',
+      apiUrl: 'https://getsuggestedrecipesv2-3sf3lmsvra-uc.a.run.app',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
@@ -124,4 +180,15 @@ String _serializeJson(dynamic jsonVar, [bool isList = false]) {
     }
     return isList ? '[]' : '{}';
   }
+}
+
+String? escapeStringForJson(String? input) {
+  if (input == null) {
+    return null;
+  }
+  return input
+      .replaceAll('\\', '\\\\')
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', '\\n')
+      .replaceAll('\t', '\\t');
 }

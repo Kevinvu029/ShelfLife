@@ -35,11 +35,17 @@ class FoodsRecord extends FirestoreRecord {
   double get price => _price ?? 0.0;
   bool hasPrice() => _price != null;
 
+  // "expired" field.
+  bool? _expired;
+  bool get expired => _expired ?? false;
+  bool hasExpired() => _expired != null;
+
   void _initializeFields() {
     _itemName = snapshotData['itemName'] as String?;
     _expDate = snapshotData['expDate'] as DateTime?;
     _user = snapshotData['user'] as DocumentReference?;
     _price = castToType<double>(snapshotData['price']);
+    _expired = snapshotData['expired'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -80,6 +86,7 @@ Map<String, dynamic> createFoodsRecordData({
   DateTime? expDate,
   DocumentReference? user,
   double? price,
+  bool? expired,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -87,6 +94,7 @@ Map<String, dynamic> createFoodsRecordData({
       'expDate': expDate,
       'user': user,
       'price': price,
+      'expired': expired,
     }.withoutNulls,
   );
 
@@ -101,12 +109,13 @@ class FoodsRecordDocumentEquality implements Equality<FoodsRecord> {
     return e1?.itemName == e2?.itemName &&
         e1?.expDate == e2?.expDate &&
         e1?.user == e2?.user &&
-        e1?.price == e2?.price;
+        e1?.price == e2?.price &&
+        e1?.expired == e2?.expired;
   }
 
   @override
-  int hash(FoodsRecord? e) =>
-      const ListEquality().hash([e?.itemName, e?.expDate, e?.user, e?.price]);
+  int hash(FoodsRecord? e) => const ListEquality()
+      .hash([e?.itemName, e?.expDate, e?.user, e?.price, e?.expired]);
 
   @override
   bool isValidKey(Object? o) => o is FoodsRecord;

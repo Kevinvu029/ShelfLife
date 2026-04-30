@@ -6,6 +6,7 @@ import '/components/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -181,7 +182,7 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                                     await FlutterBarcodeScanner.scanBarcode(
                                   '#C62828', // scanning line color
                                   'Cancel', // cancel button text
-                                  true, // whether to show the flash icon
+                                  true, // whether to show the torch (camera LED) toggle icon
                                   ScanMode.BARCODE,
                                 );
 
@@ -730,6 +731,7 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                                           user: currentUserReference,
                                           price: double.tryParse(_model
                                               .priceFieldTextController.text),
+                                          expired: false,
                                         ));
                                     logFirebaseEvent(
                                         'addFoodButton_show_snack_bar');
@@ -790,6 +792,18 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                                     FFAppState().numFoodAdded =
                                         FFAppState().numFoodAdded + 1;
                                     safeSetState(() {});
+                                    if (FFAppState().numFoodAdded == 100) {
+                                      logFirebaseEvent(
+                                          'addFoodButton_navigate_to');
+
+                                      context.pushNamed(
+                                          SurveyPageWidget.routeName);
+
+                                      logFirebaseEvent(
+                                          'addFoodButton_update_app_state');
+                                      FFAppState().numFoodAdded = 0;
+                                      safeSetState(() {});
+                                    }
                                     if (getRemoteConfigBool(
                                         'showPostAddSurvey')) {
                                       if (FFAppState().numFoodAdded == 5) {

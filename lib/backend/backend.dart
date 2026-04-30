@@ -6,8 +6,9 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/users1_record.dart';
-import 'schema/foods_record.dart';
 import 'schema/a_b_test_survey_record.dart';
+import 'schema/food_waste_record.dart';
+import 'schema/foods_record.dart';
 import 'schema/user_feed_back_record.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -18,8 +19,9 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/users1_record.dart';
-export 'schema/foods_record.dart';
 export 'schema/a_b_test_survey_record.dart';
+export 'schema/food_waste_record.dart';
+export 'schema/foods_record.dart';
 export 'schema/user_feed_back_record.dart';
 
 /// Functions to query Users1Records (as a Stream and as a Future).
@@ -59,43 +61,6 @@ Future<List<Users1Record>> queryUsers1RecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query FoodsRecords (as a Stream and as a Future).
-Future<int> queryFoodsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      FoodsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<FoodsRecord>> queryFoodsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      FoodsRecord.collection,
-      FoodsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<FoodsRecord>> queryFoodsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      FoodsRecord.collection,
-      FoodsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query ABTestSurveyRecords (as a Stream and as a Future).
 Future<int> queryABTestSurveyRecordCount({
   Query Function(Query)? queryBuilder,
@@ -128,6 +93,80 @@ Future<List<ABTestSurveyRecord>> queryABTestSurveyRecordOnce({
     queryCollectionOnce(
       ABTestSurveyRecord.collection,
       ABTestSurveyRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query FoodWasteRecords (as a Stream and as a Future).
+Future<int> queryFoodWasteRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      FoodWasteRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<FoodWasteRecord>> queryFoodWasteRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      FoodWasteRecord.collection,
+      FoodWasteRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<FoodWasteRecord>> queryFoodWasteRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      FoodWasteRecord.collection,
+      FoodWasteRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query FoodsRecords (as a Stream and as a Future).
+Future<int> queryFoodsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      FoodsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<FoodsRecord>> queryFoodsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      FoodsRecord.collection,
+      FoodsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<FoodsRecord>> queryFoodsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      FoodsRecord.collection,
+      FoodsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

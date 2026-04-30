@@ -35,11 +35,17 @@ class UserFeedBackRecord extends FirestoreRecord {
   int get ratingSelected => _ratingSelected ?? 0;
   bool hasRatingSelected() => _ratingSelected != null;
 
+  // "bugsReports" field.
+  String? _bugsReports;
+  String get bugsReports => _bugsReports ?? '';
+  bool hasBugsReports() => _bugsReports != null;
+
   void _initializeFields() {
     _surveySubmitted = snapshotData['survey_submitted'] as bool?;
     _feedback = snapshotData['Feedback'] as String?;
     _reccomendation = snapshotData['Reccomendation'] as String?;
     _ratingSelected = castToType<int>(snapshotData['rating_selected']);
+    _bugsReports = snapshotData['bugsReports'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -81,6 +87,7 @@ Map<String, dynamic> createUserFeedBackRecordData({
   String? feedback,
   String? reccomendation,
   int? ratingSelected,
+  String? bugsReports,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -88,6 +95,7 @@ Map<String, dynamic> createUserFeedBackRecordData({
       'Feedback': feedback,
       'Reccomendation': reccomendation,
       'rating_selected': ratingSelected,
+      'bugsReports': bugsReports,
     }.withoutNulls,
   );
 
@@ -103,12 +111,18 @@ class UserFeedBackRecordDocumentEquality
     return e1?.surveySubmitted == e2?.surveySubmitted &&
         e1?.feedback == e2?.feedback &&
         e1?.reccomendation == e2?.reccomendation &&
-        e1?.ratingSelected == e2?.ratingSelected;
+        e1?.ratingSelected == e2?.ratingSelected &&
+        e1?.bugsReports == e2?.bugsReports;
   }
 
   @override
-  int hash(UserFeedBackRecord? e) => const ListEquality().hash(
-      [e?.surveySubmitted, e?.feedback, e?.reccomendation, e?.ratingSelected]);
+  int hash(UserFeedBackRecord? e) => const ListEquality().hash([
+        e?.surveySubmitted,
+        e?.feedback,
+        e?.reccomendation,
+        e?.ratingSelected,
+        e?.bugsReports
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is UserFeedBackRecord;

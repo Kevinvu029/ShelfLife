@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -186,7 +185,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         logFirebaseEvent('IconButton_navigate_to');
 
                         context.pushNamed(
-                          SurveyPageWidget.routeName,
+                          AiRecipePageWidget.routeName,
                           extra: <String, dynamic>{
                             '__transition_info__': TransitionInfo(
                               hasTransition: true,
@@ -202,19 +201,16 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       borderWidth: 1.0,
                       buttonSize: 50.0,
                       icon: Icon(
-                        Icons.logout,
+                        Icons.settings_sharp,
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         size: 26.0,
                       ),
                       onPressed: () async {
-                        logFirebaseEvent('NAV_BAR_COMP_logout_ICN_ON_TAP');
-                        logFirebaseEvent('IconButton_auth');
-                        GoRouter.of(context).prepareAuthEvent();
-                        await authManager.signOut();
-                        GoRouter.of(context).clearRedirectLocation();
+                        logFirebaseEvent(
+                            'NAV_BAR_COMP_settings_sharp_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_to');
 
-                        context.goNamedAuth(
-                            AccWidget.routeName, context.mounted);
+                        context.pushNamed(UserSettingsWidget.routeName);
                       },
                     ),
                   ],
