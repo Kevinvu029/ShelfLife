@@ -127,14 +127,19 @@ void main() async {
     ));
     await GoogleFonts.pendingFonts();
 
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byKey(const ValueKey('createAccount_ttkv')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.enterText(
         find.byKey(const ValueKey('emailAddress_Create_np8b')),
-        'new_user@gmail.com');
+        'newuser@gmail.com');
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.enterText(
         find.byKey(const ValueKey('password_Create_1fci')), 'test123');
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.enterText(
         find.byKey(const ValueKey('confirm_password_Create_vd6p')), 'test123');
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byKey(const ValueKey('Button_3r9y')));
     await tester.pumpAndSettle(
       const Duration(milliseconds: 500),
