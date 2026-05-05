@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'user_settings_widget.dart' show UserSettingsWidget;
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class UserSettingsModel extends FlutterFlowModel<UserSettingsWidget> {
   ///  State fields for stateful widgets in this page.
@@ -10,6 +11,8 @@ class UserSettingsModel extends FlutterFlowModel<UserSettingsWidget> {
   FFUploadedFile uploadedLocalFile_userPF =
       FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
   String uploadedFileUrl_userPF = '';
+
+  AudioPlayer? soundPlayer;
 
   @override
   void initState(BuildContext context) {}

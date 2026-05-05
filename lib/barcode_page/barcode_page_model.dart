@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'barcode_page_widget.dart' show BarcodePageWidget;
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class BarcodePageModel extends FlutterFlowModel<BarcodePageWidget> {
   ///  Local state fields for this page.
@@ -33,6 +34,8 @@ class BarcodePageModel extends FlutterFlowModel<BarcodePageWidget> {
   TextEditingController? priceFieldTextController;
   String? Function(BuildContext, String?)? priceFieldTextControllerValidator;
   DateTime? datePicked;
+  AudioPlayer? soundPlayer1;
+  AudioPlayer? soundPlayer2;
   // Model for NavBar component.
   late NavBarModel navBarModel;
 

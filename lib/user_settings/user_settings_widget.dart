@@ -11,6 +11,7 @@ import '/flutter_flow/upload_data.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'user_settings_model.dart';
 export 'user_settings_model.dart';
 
@@ -406,6 +407,17 @@ class _UserSettingsWidgetState extends State<UserSettingsWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'USER_SETTINGS_DELETE_ACCOUNT_BTN_ON_TAP');
+                            logFirebaseEvent('Button_play_sound');
+                            _model.soundPlayer ??= AudioPlayer();
+                            if (_model.soundPlayer!.playing) {
+                              await _model.soundPlayer!.stop();
+                            }
+                            _model.soundPlayer!.setVolume(0.7);
+                            _model.soundPlayer!
+                                .setAsset(
+                                    'assets/audios/are-you-sure-omni-man.mp3')
+                                .then((_) => _model.soundPlayer!.play());
+
                             logFirebaseEvent('Button_bottom_sheet');
                             await showModalBottomSheet(
                               isScrollControlled: true,

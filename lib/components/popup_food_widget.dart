@@ -109,28 +109,6 @@ class _PopupFoodWidgetState extends State<PopupFoodWidget> {
                           },
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, -1.0),
-                        child: Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 20.0,
-                            borderWidth: 1.0,
-                            buttonSize: 40.0,
-                            fillColor: Color(0xD514181B),
-                            icon: Icon(
-                              Icons.favorite_border,
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              size: 24.0,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

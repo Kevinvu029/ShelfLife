@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'edit_food_details_widget.dart' show EditFoodDetailsWidget;
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class EditFoodDetailsModel extends FlutterFlowModel<EditFoodDetailsWidget> {
   ///  Local state fields for this page.
@@ -12,6 +13,7 @@ class EditFoodDetailsModel extends FlutterFlowModel<EditFoodDetailsWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  AudioPlayer? soundPlayer;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController1;

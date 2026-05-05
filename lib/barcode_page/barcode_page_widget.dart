@@ -10,6 +10,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'barcode_page_model.dart';
 export 'barcode_page_model.dart';
@@ -773,6 +774,18 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                                       ),
                                     );
                                     logFirebaseEvent(
+                                        'addFoodButton_play_sound');
+                                    _model.soundPlayer1 ??= AudioPlayer();
+                                    if (_model.soundPlayer1!.playing) {
+                                      await _model.soundPlayer1!.stop();
+                                    }
+                                    _model.soundPlayer1!.setVolume(0.7);
+                                    _model.soundPlayer1!
+                                        .setAsset('assets/audios/correct.mp3')
+                                        .then(
+                                            (_) => _model.soundPlayer1!.play());
+
+                                    logFirebaseEvent(
                                         'addFoodButton_clear_text_fields_pin_code');
                                     safeSetState(() {
                                       _model.itemNameFieldTextController
@@ -885,6 +898,18 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                                                 .alternate,
                                       ),
                                     );
+                                    logFirebaseEvent(
+                                        'addFoodButton_play_sound');
+                                    _model.soundPlayer2 ??= AudioPlayer();
+                                    if (_model.soundPlayer2!.playing) {
+                                      await _model.soundPlayer2!.stop();
+                                    }
+                                    _model.soundPlayer2!.setVolume(0.7);
+                                    _model.soundPlayer2!
+                                        .setAsset(
+                                            'assets/audios/windows-xp-critical-error-full-version.mp3')
+                                        .then(
+                                            (_) => _model.soundPlayer2!.play());
                                   }
                                 },
                                 text: 'Add Food!',

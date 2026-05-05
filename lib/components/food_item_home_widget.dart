@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'food_item_home_model.dart';
 export 'food_item_home_model.dart';
 
@@ -186,6 +187,16 @@ class _FoodItemHomeWidgetState extends State<FoodItemHomeWidget> {
                 logFirebaseEvent('FOOD_ITEM_HOME_delete_forever_ICN_ON_TAP');
                 logFirebaseEvent('IconButton_backend_call');
                 await widget.foodDoc!.reference.delete();
+                logFirebaseEvent('IconButton_play_sound');
+                _model.soundPlayer ??= AudioPlayer();
+                if (_model.soundPlayer!.playing) {
+                  await _model.soundPlayer!.stop();
+                }
+                _model.soundPlayer!.setVolume(0.7);
+                _model.soundPlayer!
+                    .setAsset(
+                        'assets/audios/Mac_Trash_Delete_(Apple_Sound)_-_Sound_Effect_for_editing_4.mp3')
+                    .then((_) => _model.soundPlayer!.play());
               },
             ),
           ].divide(SizedBox(width: 12.0)),
