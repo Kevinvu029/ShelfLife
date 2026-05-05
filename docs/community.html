@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShelfLife — Community Leaderboard</title>
+  <meta name="description" content="See how your pantry management stacks up. Live ShelfLife community stats and leaderboards." />
+  <link rel="icon" href="app_launcher_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Daruma+Drop+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:   #462521;
+      --secondary: #8A6552;
+      --cream:     #FFE0B5;
+      --bg:        #F1F4F8;
+      --accent:    #CA2E55;
+      --success:   #249689;
+      --warning:   #F9CF58;
+      --error:     #FF5963;
+      --text:      #14181B;
+      --muted:     #57636C;
+      --white:     #FFFFFF;
+      --radius:    12px;
+      --shadow:    0 2px 12px rgba(70,37,33,0.10);
+      --font-head: 'Daruma Drop One', cursive;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ── SITE NAV ── */
+    .site-nav {
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 5%;
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .site-nav .brand {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .site-nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+    .site-nav-links a {
+      color: rgba(255,224,181,0.85);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .site-nav-links a:hover, .site-nav-links a.active { color: #fff; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: linear-gradient(135deg, var(--primary) 0%, #6b3a35 100%);
+      color: var(--white);
+      padding: 52px 5% 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,224,181,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .page-header h1 {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      color: var(--cream);
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .page-header p {
+      color: rgba(255,224,181,0.75);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(36,150,137,0.25);
+      border: 1px solid rgba(36,150,137,0.5);
+      color: #80cbc4;
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      position: relative;
+    }
+    .live-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4dd0c4;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── MAIN CONTENT ── */
+    .community-content {
+      max-width: 1000px;
+      margin: 32px auto;
+      padding: 0 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px 20px;
+      text-align: center;
+      border-top: 3px solid transparent;
+    }
+    .stat-card.color-green { border-top-color: var(--success); }
+    .stat-card.color-yellow { border-top-color: var(--warning); }
+    .stat-card.color-red { border-top-color: var(--accent); }
+    .stat-card.color-brown { border-top-color: var(--secondary); }
+    .stat-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .stat-value {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+    /* Loading/skeleton */
+    .stat-value.loading, .skeleton-text {
+      background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 6px;
+      color: transparent !important;
+      min-width: 80px;
+      display: inline-block;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* ── LEADERBOARD CARD ── */
+    .leaderboard-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .leaderboard-header {
+      background: var(--primary);
+      color: var(--cream);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .leaderboard-header h2 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .leaderboard-header span {
+      font-size: 0.78rem;
+      color: rgba(255,224,181,0.65);
+    }
+
+    .leaderboard-table-wrap { overflow-x: auto; }
+    table.leaderboard {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .leaderboard thead th {
+      background: #FFF8F0;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 2px solid var(--cream);
+    }
+    .leaderboard tbody tr {
+      border-bottom: 1px solid #f1f4f8;
+      transition: background 0.12s;
+    }
+    .leaderboard tbody tr:last-child { border-bottom: none; }
+    .leaderboard tbody tr:hover { background: #FFFBF5; }
+    .leaderboard td { padding: 14px 16px; font-size: 0.875rem; color: var(--muted); vertical-align: middle; }
+
+    .rank-cell {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: var(--muted);
+      min-width: 44px;
+    }
+    .rank-1 { color: #F8C612; }
+    .rank-2 { color: #9E9E9E; }
+    .rank-3 { color: #CD7F32; }
+
+    .user-cell { display: flex; align-items: center; gap: 12px; }
+    .user-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .user-name { font-weight: 600; color: var(--text); }
+    .user-joined { font-size: 0.75rem; color: var(--muted); }
+
+    .items-cell { font-weight: 600; color: var(--primary); }
+    .value-cell { color: var(--success); font-weight: 600; }
+
+    .medal { font-size: 1.1rem; }
+
+    /* Progress bar inside table */
+    .bar-wrap { width: 80px; height: 6px; background: #f1f4f8; border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--success); border-radius: 4px; }
+
+    /* ── RECENT ACTIVITY ── */
+    .activity-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .activity-header {
+      background: var(--secondary);
+      color: var(--white);
+      padding: 16px 24px;
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+    }
+    .activity-list { list-style: none; }
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 20px;
+      border-bottom: 1px solid #f1f4f8;
+      font-size: 0.875rem;
+      transition: background 0.12s;
+    }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-item:hover { background: #FFFBF5; }
+    .activity-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .activity-dot.fresh { background: var(--success); }
+    .activity-dot.soon { background: var(--warning); }
+    .activity-dot.expired { background: var(--error); }
+    .activity-item-name { font-weight: 600; color: var(--text); flex: 1; }
+    .activity-meta { color: var(--muted); font-size: 0.8rem; text-align: right; }
+
+    /* ── EMPTY / ERROR STATES ── */
+    .empty-state {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* ── STATUS BANNER ── */
+    #status-banner {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: none;
+      margin-bottom: 4px;
+    }
+    #status-banner.info { background: #E3F2FD; color: #0d47a1; display: block; }
+    #status-banner.error { background: #FFEBEE; color: #b71c1c; display: block; }
+    #status-banner.warning { background: #FFF8E1; color: #4e3400; display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: var(--muted);
+      text-align: center;
+      padding: 24px 5%;
+      font-size: 0.82rem;
+      margin-top: 16px;
+    }
+    footer a { color: var(--secondary); text-decoration: none; }
+    footer a:hover { color: var(--cream); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .bar-wrap { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SITE NAV -->
+<div class="site-nav">
+  <a href="index.html" class="brand">ShelfLife</a>
+  <ul class="site-nav-links">
+    <li><a href="index.html">Play Store Listing</a></li>
+    <li><a href="user-guide.html">User Guide</a></li>
+    <li><a href="community.html" class="active">Community</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>🏆 Community Leaderboard</h1>
+  <p>See how ShelfLife users around the world are fighting food waste — together.</p>
+  <div class="live-badge"><span class="live-dot"></span> Live data from Firebase</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="community-content">
+
+  <!-- STATUS BANNER (shown on load errors) -->
+  <div id="status-banner"></div>
+
+  <!-- COMMUNITY STATS -->
+  <div class="stats-grid">
+    <div class="stat-card color-green">
+      <span class="stat-icon">🥫</span>
+      <div class="stat-value loading" id="stat-total-items">—</div>
+      <div class="stat-label">Total Items Tracked</div>
+    </div>
+    <div class="stat-card color-yellow">
+      <span class="stat-icon">💰</span>
+      <div class="stat-value loading" id="stat-total-value">—</div>
+      <div class="stat-label">Total Food Value Logged ($)</div>
+    </div>
+    <div class="stat-card color-red">
+      <span class="stat-icon">👥</span>
+      <div class="stat-value loading" id="stat-users">—</div>
+      <div class="stat-label">Active Users</div>
+    </div>
+    <div class="stat-card color-brown">
+      <span class="stat-icon">📊</span>
+      <div class="stat-value loading" id="stat-avg">—</div>
+      <div class="stat-label">Avg Items per User</div>
+    </div>
+  </div>
+
+  <!-- TOP PANTRY MANAGERS LEADERBOARD -->
+  <div class="leaderboard-card">
+    <div class="leaderboard-header">
+      <h2>Top Pantry Managers</h2>
+      <span>Ranked by total items tracked</span>
+    </div>
+    <div class="leaderboard-table-wrap">
+      <table class="leaderboard">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>User</th>
+            <th>Items Tracked</th>
+            <th>Value Logged</th>
+            <th>Progress</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body">
+          <!-- filled by JS -->
+          <tr><td colspan="5"><div class="empty-state"><span class="empty-icon">⏳</span><p>Loading leaderboard…</p></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RECENT ACTIVITY -->
+  <div class="activity-card">
+    <div class="activity-header">📋 Recently Added Items</div>
+    <ul class="activity-list" id="activity-list">
+      <li class="activity-item">
+        <span class="activity-dot soon"></span>
+        <span class="activity-item-name" style="color:var(--muted);">Loading recent activity…</span>
+      </li>
+    </ul>
+  </div>
+
+</div><!-- /community-content -->
+
+<!-- FOOTER -->
+<footer>
+  <p>ShelfLife &copy; 2026 &mdash;
+    <a href="index.html">Play Store Listing</a> ·
+    <a href="user-guide.html">User Guide</a> ·
+    <a href="https://github.com/Kevinvu029/ShelfLife" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<!-- Firebase v9 compat SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // ── Firebase config ──
+  const firebaseConfig = {
+    apiKey:            "AIzaSyC5UzI5-O_FeL_33AaDGVkgOsCWLAn3CC0",
+    authDomain:        "shelf-life-ugqnhg.firebaseapp.com",
+    projectId:         "shelf-life-ugqnhg",
+    storageBucket:     "shelf-life-ugqnhg.firebasestorage.app",
+    messagingSenderId: "1020562674446",
+    appId:             "1:1020562674446:web:85f06519a3cfa86b0afd5f",
+    measurementId:     "G-Z9X41EL28K"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // ── Helpers ──
+  function setBanner(msg, type) {
+    const el = document.getElementById('status-banner');
+    el.textContent = msg;
+    el.className = type;
+  }
+
+  function avatarColor(name) {
+    const colors = [
+      'linear-gradient(135deg,#462521,#8A6552)',
+      'linear-gradient(135deg,#249689,#4dd0c4)',
+      'linear-gradient(135deg,#CA2E55,#e57373)',
+      'linear-gradient(135deg,#4285f4,#34a853)',
+      'linear-gradient(135deg,#9c27b0,#e91e63)',
+      'linear-gradient(135deg,#f57c00,#ffd54f)',
+      'linear-gradient(135deg,#00796b,#80cbc4)',
+    ];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    return colors[Math.abs(hash) % colors.length];
+  }
+
+  function initials(name) {
+    if (!name || name.trim() === '') return '?';
+    return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).slice(0, 2).join('');
+  }
+
+  function rankMedal(rank) {
+    if (rank === 1) return '<span class="medal">🥇</span>';
+    if (rank === 2) return '<span class="medal">🥈</span>';
+    if (rank === 3) return '<span class="medal">🥉</span>';
+    return rank;
+  }
+
+  function rankClass(rank) {
+    if (rank === 1) return 'rank-1';
+    if (rank === 2) return 'rank-2';
+    if (rank === 3) return 'rank-3';
+    return '';
+  }
+
+  function expiryClass(expDate) {
+    if (!expDate) return 'fresh';
+    const now = new Date();
+    const diff = (expDate - now) / (1000 * 60 * 60 * 24);
+    if (diff < 0)  return 'expired';
+    if (diff <= 7) return 'soon';
+    return 'fresh';
+  }
+
+  function timeAgo(ts) {
+    if (!ts) return '';
+    const date = ts.toDate ? ts.toDate() : new Date(ts);
+    const diff = Math.floor((Date.now() - date) / 1000);
+    if (diff < 60)   return 'just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+    return `${Math.floor(diff / 86400)}d ago`;
+  }
+
+  // ── Load data ──
+  async function loadCommunityData() {
+    try {
+      // Fetch all foods (limit 500 for performance)
+      const foodsSnap = await db.collection('foods').limit(500).get();
+
+      if (foodsSnap.empty) {
+        showDemoData();
+        setBanner('No community data yet — showing sample data below.', 'info');
+        return;
+      }
+
+      const foods = foodsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+      // Community-level stats
+      const totalItems = foods.length;
+      const totalValue = foods.reduce((sum, f) => sum + (f.price || 0), 0);
+
+      // Group by user reference path
+      const userMap = {};
+      foods.forEach(f => {
+        const userPath = f.user ? f.user.path : 'anonymous';
+        if (!userMap[userPath]) {
+          userMap[userPath] = { ref: f.user, items: 0, value: 0 };
+        }
+        userMap[userPath].items++;
+        userMap[userPath].value += f.price || 0;
+      });
+
+      const uniqueUsers = Object.keys(userMap).length;
+
+      // Update stat cards
+      document.getElementById('stat-total-items').textContent = totalItems.toLocaleString();
+      document.getElementById('stat-total-items').classList.remove('loading');
+      document.getElementById('stat-total-value').textContent = '$' + totalValue.toFixed(0);
+      document.getElementById('stat-total-value').classList.remove('loading');
+      document.getElementById('stat-users').textContent = uniqueUsers.toLocaleString();
+      document.getElementById('stat-users').classList.remove('loading');
+      document.getElementById('stat-avg').textContent = uniqueUsers > 0 ? (totalItems / uniqueUsers).toFixed(1) : '0';
+      document.getElementById('stat-avg').classList.remove('loading');
+
+      // Sort users by item count for leaderboard
+      const sortedUsers = Object.entries(userMap)
+        .sort((a, b) => b[1].items - a[1].items)
+        .slice(0, 10);
+
+      const maxItems = sortedUsers[0]?.[1].items || 1;
+
+      // Resolve display names for top users
+      const nameCache = {};
+      const userRefs = sortedUsers
+        .filter(([, v]) => v.ref)
+        .map(([, v]) => v.ref);
+
+      // Batch fetch user docs (Firestore getAll)
+      if (userRefs.length > 0) {
+        try {
+          const userSnaps = await db.getAll(...userRefs.slice(0, 10));
+          userSnaps.forEach(snap => {
+            if (snap.exists) {
+              const d = snap.data();
+              nameCache[snap.ref.path] = d.display_name || d.email || 'ShelfLife User';
+            }
+          });
+        } catch (_) {
+          // getAll may fail if some refs don't exist — continue without names
+        }
+      }
+
+      // Build leaderboard rows
+      const tbody = document.getElementById('leaderboard-body');
+      tbody.innerHTML = '';
+      sortedUsers.forEach(([path, data], idx) => {
+        const rank = idx + 1;
+        const name = nameCache[path] || (path === 'anonymous' ? 'Anonymous User' : 'ShelfLife User');
+        const pct = Math.round((data.items / maxItems) * 100);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="rank-cell ${rankClass(rank)}">${rankMedal(rank)}</td>
+          <td>
+            <div class="user-cell">
+              <div class="user-avatar" style="background:${avatarColor(name)}">${initials(name)}</div>
+              <div>
+                <div class="user-name">${escHtml(name)}</div>
+              </div>
+            </div>
+          </td>
+          <td class="items-cell">${data.items} items</td>
+          <td class="value-cell">$${data.value.toFixed(2)}</td>
+          <td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div></td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      // Recent activity — get last 10 foods by addedAt or just first 10
+      const recentFoods = foods
+        .filter(f => f.expDate)
+        .sort((a, b) => {
+          const ta = a.expDate?.seconds || 0;
+          const tb = b.expDate?.seconds || 0;
+          return tb - ta;
+        })
+        .slice(0, 10);
+
+      const activityList = document.getElementById('activity-list');
+      activityList.innerHTML = '';
+      recentFoods.forEach(f => {
+        const expDate = f.expDate?.toDate ? f.expDate.toDate() : null;
+        const cls = expiryClass(expDate);
+        const dateStr = expDate ? expDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+        const li = document.createElement('li');
+        li.className = 'activity-item';
+        li.innerHTML = `
+          <span class="activity-dot ${cls}"></span>
+          <span class="activity-item-name">${escHtml(f.itemName || 'Unknown item')}</span>
+          <span class="activity-meta">Expires ${dateStr}</span>
+        `;
+        activityList.appendChild(li);
+      });
+
+      if (recentFoods.length === 0) {
+        activityList.innerHTML = '<li class="activity-item"><span class="activity-item-name" style="color:var(--muted);">No recent items.</span></li>';
+      }
+
+    } catch (err) {
+      console.error('Firebase error:', err);
+      showDemoData();
+      if (err.code === 'permission-denied') {
+        setBanner('Live data requires authentication — showing sample community data below.', 'warning');
+      } else {
+        setBanner('Could not connect to the database — showing sample community data below.', 'warning');
+      }
+    }
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ── Demo/fallback data shown when Firebase is unavailable ──
+  function showDemoData() {
+    const demoUsers = [
+      { name: 'Sarah M.',        items: 42, value: 187.50 },
+      { name: 'JamieKitchen',    items: 38, value: 142.20 },
+      { name: 'TechReviewer99',  items: 31, value: 98.75  },
+      { name: 'FoodieHQ',        items: 27, value: 220.00 },
+      { name: 'MealPrepKing',    items: 24, value: 76.40  },
+      { name: 'GreenPantry',     items: 19, value: 53.10  },
+      { name: 'WasteFighter',    items: 15, value: 44.90  },
+      { name: 'FreshFam',        items: 11, value: 31.00  },
+    ];
+    const totalItems = demoUsers.reduce((s, u) => s + u.items, 0);
+    const totalValue = demoUsers.reduce((s, u) => s + u.value, 0);
+
+    document.getElementById('stat-total-items').textContent = totalItems;
+    document.getElementById('stat-total-items').classList.remove('loading');
+    document.getElementById('stat-total-value').textContent = '$' + totalValue.toFixed(0);
+    document.getElementById('stat-total-value').classList.remove('loading');
+    document.getElementById('stat-users').textContent = demoUsers.length;
+    document.getElementById('stat-users').classList.remove('loading');
+    document.getElementById('stat-avg').textContent = (totalItems / demoUsers.length).toFixed(1);
+    document.getElementById('stat-avg').classList.remove('loading');
+
+    const maxItems = demoUsers[0].items;
+    const tbody = document.getElementById('leaderboard-body');
+    tbody.innerHTML = '';
+    demoUsers.forEach((u, idx) => {
+      const rank = idx + 1;
+      const pct = Math.round((u.items / maxItems) * 100);
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="rank-cell ${rankClass(rank)}">${rankMedal(rank)}</td>
+        <td>
+          <div class="user-cell">
+            <div class="user-avatar" style="background:${avatarColor(u.name)}">${initials(u.name)}</div>
+            <div><div class="user-name">${escHtml(u.name)}</div></div>
+          </div>
+        </td>
+        <td class="items-cell">${u.items} items</td>
+        <td class="value-cell">$${u.value.toFixed(2)}</td>
+        <td><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%"></div></div></td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    const demoActivity = [
+      { name: 'Whole Milk',        cls: 'soon',    date: 'May 7, 2026'  },
+      { name: 'Greek Yogurt',      cls: 'fresh',   date: 'May 18, 2026' },
+      { name: 'Baby Spinach',      cls: 'expired', date: 'Apr 30, 2026' },
+      { name: 'Cheddar Cheese',    cls: 'soon',    date: 'May 9, 2026'  },
+      { name: 'Orange Juice',      cls: 'fresh',   date: 'May 22, 2026' },
+      { name: 'Deli Turkey',       cls: 'soon',    date: 'May 6, 2026'  },
+      { name: 'Sourdough Bread',   cls: 'expired', date: 'May 1, 2026'  },
+      { name: 'Almond Milk',       cls: 'fresh',   date: 'Jun 3, 2026'  },
+    ];
+    const activityList = document.getElementById('activity-list');
+    activityList.innerHTML = '';
+    demoActivity.forEach(a => {
+      const li = document.createElement('li');
+      li.className = 'activity-item';
+      li.innerHTML = `
+        <span class="activity-dot ${a.cls}"></span>
+        <span class="activity-item-name">${escHtml(a.name)}</span>
+        <span class="activity-meta">Expires ${a.date}</span>
+      `;
+      activityList.appendChild(li);
+    });
+  }
+
+  // Boot
+  loadCommunityData();
+</script>
+</body>
+</html>

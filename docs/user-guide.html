@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShelfLife — User Guide</title>
+  <meta name="description" content="Complete user documentation for ShelfLife: how to add food, scan barcodes, track expiry dates, and manage your pantry." />
+  <link rel="icon" href="app_launcher_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Daruma+Drop+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --primary:   #462521;
+      --secondary: #8A6552;
+      --cream:     #FFE0B5;
+      --bg:        #F1F4F8;
+      --accent:    #CA2E55;
+      --success:   #249689;
+      --warning:   #F9CF58;
+      --error:     #FF5963;
+      --text:      #14181B;
+      --muted:     #57636C;
+      --white:     #FFFFFF;
+      --radius:    10px;
+      --shadow:    0 2px 12px rgba(70,37,33,0.10);
+      --font-head: 'Daruma Drop One', cursive;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* ── SITE NAV ── */
+    .site-nav {
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 5%;
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .site-nav .brand {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .site-nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+    .site-nav-links a {
+      color: rgba(255,224,181,0.85);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .site-nav-links a:hover, .site-nav-links a.active { color: #fff; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 48px 5% 40px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .page-header p {
+      color: rgba(255,224,181,0.75);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── LAYOUT ── */
+    .doc-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 28px;
+      max-width: 1100px;
+      margin: 32px auto;
+      padding: 0 5%;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .doc-sidebar {
+      position: sticky;
+      top: 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .sidebar-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .toc { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-item a {
+      display: block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      transition: background 0.15s, color 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .toc-item a:hover { background: #FFF8F0; color: var(--primary); }
+    .toc-item.active a { background: #FFF8F0; color: var(--primary); border-left-color: var(--primary); font-weight: 600; }
+    .toc-sub a { padding-left: 24px; font-size: 0.82rem; }
+
+    /* ── MAIN CONTENT ── */
+    .doc-content { display: flex; flex-direction: column; gap: 24px; }
+
+    .doc-section {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .doc-section h2 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--cream);
+    }
+
+    .doc-section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 20px 0 10px;
+    }
+
+    .doc-section p { font-size: 0.9rem; color: var(--muted); margin-bottom: 12px; }
+    .doc-section ul, .doc-section ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+    .doc-section li { font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
+    .doc-section strong { color: var(--text); }
+
+    /* Steps */
+    .steps-list { list-style: none; padding: 0; counter-reset: step-counter; display: flex; flex-direction: column; gap: 14px; margin: 14px 0; }
+    .steps-list li {
+      counter-increment: step-counter;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .steps-list li::before {
+      content: counter(step-counter);
+      background: var(--primary);
+      color: var(--cream);
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .steps-list li .step-body { flex: 1; font-size: 0.9rem; color: var(--muted); }
+    .steps-list li .step-body strong { color: var(--text); display: block; margin-bottom: 3px; }
+
+    /* Callouts */
+    .callout {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 0.875rem;
+    }
+    .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .callout-body { color: var(--text); line-height: 1.55; }
+    .callout-tip { background: #E8F5E9; border-left: 3px solid var(--success); }
+    .callout-tip .callout-body { color: #1b5e20; }
+    .callout-warn { background: #FFF8E1; border-left: 3px solid var(--warning); }
+    .callout-warn .callout-body { color: #4e3400; }
+    .callout-info { background: #E3F2FD; border-left: 3px solid #1976D2; }
+    .callout-info .callout-body { color: #0d2f58; }
+
+    /* Status badges */
+    .status-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+    .status-badge {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .status-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .status-fresh { background: #E8F5E9; color: #2e7d32; }
+    .status-fresh .status-dot { background: var(--success); }
+    .status-soon { background: #FFF8E1; color: #7b5800; }
+    .status-soon .status-dot { background: var(--warning); }
+    .status-expired { background: #FFEBEE; color: #b71c1c; }
+    .status-expired .status-dot { background: var(--error); }
+
+    /* Requirements table */
+    .req-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.875rem; }
+    .req-table th {
+      background: #FFF8F0;
+      color: var(--primary);
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid var(--cream);
+    }
+    .req-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f1f3f4;
+      color: var(--muted);
+      vertical-align: top;
+    }
+    .req-table tr:last-child td { border-bottom: none; }
+
+    /* Screen mockup label */
+    .screen-label {
+      display: inline-block;
+      background: var(--cream);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: var(--muted);
+      text-align: center;
+      padding: 24px 5%;
+      font-size: 0.82rem;
+      margin-top: 32px;
+    }
+    footer a { color: var(--secondary); text-decoration: none; }
+    footer a:hover { color: var(--cream); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .doc-layout { grid-template-columns: 1fr; }
+      .doc-sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SITE NAV -->
+<div class="site-nav">
+  <a href="index.html" class="brand">ShelfLife</a>
+  <ul class="site-nav-links">
+    <li><a href="index.html">Play Store Listing</a></li>
+    <li><a href="user-guide.html" class="active">User Guide</a></li>
+    <li><a href="community.html">Community</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>User Guide</h1>
+  <p>Everything you need to start tracking expiry dates, reducing waste, and saving money with ShelfLife.</p>
+</div>
+
+<!-- DOC LAYOUT -->
+<div class="doc-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="doc-sidebar">
+    <div class="sidebar-title">Contents</div>
+    <ul class="toc">
+      <li class="toc-item"><a href="#ch1">1. Introduction</a></li>
+      <li class="toc-item"><a href="#ch2">2. Getting Started</a></li>
+      <li class="toc-sub toc-item"><a href="#ch2-install">2.1 Installation</a></li>
+      <li class="toc-sub toc-item"><a href="#ch2-account">2.2 Creating an Account</a></li>
+      <li class="toc-sub toc-item"><a href="#ch2-signin">2.3 Signing In</a></li>
+      <li class="toc-item"><a href="#ch3">3. Home Screen</a></li>
+      <li class="toc-item"><a href="#ch4">4. Adding Food Items</a></li>
+      <li class="toc-sub toc-item"><a href="#ch4-barcode">4.1 Barcode Scanner</a></li>
+      <li class="toc-sub toc-item"><a href="#ch4-manual">4.2 Manual Entry</a></li>
+      <li class="toc-item"><a href="#ch5">5. Managing Your Pantry</a></li>
+      <li class="toc-sub toc-item"><a href="#ch5-colors">5.1 Expiry Status Colors</a></li>
+      <li class="toc-sub toc-item"><a href="#ch5-edit">5.2 Editing Items</a></li>
+      <li class="toc-sub toc-item"><a href="#ch5-delete">5.3 Deleting Items</a></li>
+      <li class="toc-item"><a href="#ch6">6. Price Tracking</a></li>
+      <li class="toc-item"><a href="#ch7">7. Account Settings</a></li>
+      <li class="toc-item"><a href="#ch8">8. Troubleshooting</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="doc-content">
+
+    <!-- CHAPTER 1 -->
+    <section class="doc-section" id="ch1">
+      <div class="section-label">Chapter 1</div>
+      <h2>Introduction</h2>
+      <p>
+        <strong>ShelfLife</strong> is a mobile app for iOS and Android that helps you track the expiration dates of everything in your home pantry, fridge, and freezer. By scanning a product barcode or entering an item manually, ShelfLife keeps a real-time inventory of your food — and alerts you before anything goes bad.
+      </p>
+      <p>
+        The average household wastes hundreds of dollars of food each year simply because items were forgotten at the back of the fridge or pantry. ShelfLife solves this by giving you a single, color-coded view of everything you own and when it expires.
+      </p>
+
+      <h3>System Requirements</h3>
+      <table class="req-table">
+        <thead>
+          <tr><th>Platform</th><th>Minimum Version</th><th>Camera</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Android</td><td>Android 6.0 (Marshmallow)</td><td>Required for barcode scanning</td></tr>
+          <tr><td>iOS</td><td>iOS 13.0</td><td>Required for barcode scanning</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <span class="callout-body">ShelfLife requires an internet connection for account sign-in, barcode product lookup, and syncing your pantry to the cloud.</span>
+      </div>
+    </section>
+
+    <!-- CHAPTER 2 -->
+    <section class="doc-section" id="ch2">
+      <div class="section-label">Chapter 2</div>
+      <h2>Getting Started</h2>
+
+      <h3 id="ch2-install">2.1 Installation</h3>
+      <p>ShelfLife is available on both the Apple App Store and Google Play Store. Search for <strong>"ShelfLife — Stop Letting Food Expire"</strong> or follow the link on our <a href="index.html" style="color:var(--accent);">listing page</a>.</p>
+      <ol class="steps-list">
+        <li>
+          <div class="step-body">
+            <strong>Open your app store</strong>
+            Go to the App Store (iOS) or Google Play Store (Android) on your device.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Search for ShelfLife</strong>
+            Type "ShelfLife" in the search bar and look for the app with the brown pixel-art shelf icon.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap Install / Get</strong>
+            Tap the Install (Android) or Get (iOS) button. The app is free with no in-app purchases.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Grant camera permission</strong>
+            When prompted, allow ShelfLife to access your camera. This is required for barcode scanning.
+          </div>
+        </li>
+      </ol>
+
+      <h3 id="ch2-account">2.2 Creating an Account</h3>
+      <p>ShelfLife uses Firebase Authentication. You can sign up with Google, Apple, or your email address.</p>
+
+      <div class="screen-label">📱 Profile Creation Screen</div>
+      <ol class="steps-list">
+        <li>
+          <div class="step-body">
+            <strong>Open ShelfLife</strong>
+            Launch the app after installation.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap "Get Started" or "Sign Up"</strong>
+            You will be presented with three sign-in options: Google, Apple, and Email/Password.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Choose your sign-in method</strong>
+            Select Google for the fastest setup (uses your existing Google account), Apple (for iPhone users), or enter your email and create a password.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Complete your profile</strong>
+            On the profile creation screen, enter your display name and optionally your birthday. Tap <strong>Save</strong>.
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">✅</span>
+        <span class="callout-body"><strong>Tip:</strong> Use the Google sign-in option for the smoothest experience. It requires no password and your account syncs automatically across devices.</span>
+      </div>
+
+      <h3 id="ch2-signin">2.3 Signing In</h3>
+      <p>If you already have an account, tap <strong>Sign In</strong> on the welcome screen and authenticate with the same method you used during registration. Your pantry data will sync automatically from the cloud.</p>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span class="callout-body">If you sign in with a different method than you used to register (e.g., email instead of Google), a new account will be created and your previous pantry data will not appear. Always use the same sign-in method.</span>
+      </div>
+    </section>
+
+    <!-- CHAPTER 3 -->
+    <section class="doc-section" id="ch3">
+      <div class="section-label">Chapter 3</div>
+      <h2>The Home Screen</h2>
+      <p>After signing in, ShelfLife takes you to the <strong>Home Screen</strong> — your pantry dashboard.</p>
+
+      <div class="screen-label">📱 Home Screen</div>
+
+      <h3>Key Elements</h3>
+      <ul>
+        <li><strong>Expiry Summary Bar</strong> — A horizontal color bar at the top showing the proportion of items that are fresh (green), expiring soon (yellow), and expired (red) in your pantry.</li>
+        <li><strong>Item Cards</strong> — Each food item is displayed as a card showing the item name, days until expiry, and a color-coded status indicator.</li>
+        <li><strong>Filter Tabs</strong> — Switch between viewing All items, Expiring Soon, and Already Expired.</li>
+        <li><strong>Add Button (+)</strong> — Located in the bottom right, this opens the barcode scanner to add a new item.</li>
+        <li><strong>Bottom Navigation Bar</strong> — Navigate between Home, Pantry (full list), and Profile.</li>
+      </ul>
+
+      <h3>Reading the Expiry Bar</h3>
+      <p>The colored bar at the top of the home screen gives you an instant overview of your pantry's health:</p>
+      <div class="status-row">
+        <div class="status-badge status-expired"><span class="status-dot"></span>Red — Expired</div>
+        <div class="status-badge status-soon"><span class="status-dot"></span>Yellow — Expiring within 7 days</div>
+        <div class="status-badge status-fresh"><span class="status-dot"></span>Green — More than 7 days remaining</div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">✅</span>
+        <span class="callout-body">Tap any item card to open its full details, including the item name, expiry date, and price you paid.</span>
+      </div>
+    </section>
+
+    <!-- CHAPTER 4 -->
+    <section class="doc-section" id="ch4">
+      <div class="section-label">Chapter 4</div>
+      <h2>Adding Food Items</h2>
+      <p>There are two ways to add a food item to your pantry: <strong>barcode scanning</strong> (fastest) and <strong>manual entry</strong>.</p>
+
+      <h3 id="ch4-barcode">4.1 Barcode Scanner</h3>
+      <p>The barcode scanner is the primary way to add items. It uses your phone's camera and the <strong>Open Food Facts</strong> database to automatically identify products.</p>
+
+      <div class="screen-label">📱 Barcode Scanner Screen</div>
+      <ol class="steps-list">
+        <li>
+          <div class="step-body">
+            <strong>Tap the + button</strong>
+            On the Home screen, tap the floating action button (+ icon) in the bottom right corner.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Point your camera at the barcode</strong>
+            Hold your phone 4–8 inches from the barcode on the product packaging. The scanner viewfinder highlights the barcode area.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Wait for recognition</strong>
+            ShelfLife automatically scans and looks up the product. The item name and image will appear at the bottom of the screen when found.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Set the expiration date</strong>
+            Use the date picker to enter the expiry date printed on the product packaging. Tap the date field to open the calendar picker.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>(Optional) Enter the price</strong>
+            Type the price you paid for the item. This is used for the price tracking and savings calculator feature.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap Save</strong>
+            The item is added to your pantry and appears immediately on the Home screen.
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span class="callout-body">If the barcode is not recognized, the item may not be in the Open Food Facts database. Use <strong>Manual Entry</strong> (see section 4.2) to add it by name.</span>
+      </div>
+
+      <h3>Scanner Tips</h3>
+      <ul>
+        <li>Ensure good lighting — the scanner works best in well-lit environments.</li>
+        <li>Keep the camera steady for 1–2 seconds while scanning.</li>
+        <li>If the barcode is damaged or curved, try scanning from a slightly different angle.</li>
+        <li>Most standard UPC-A, EAN-13, and QR barcodes on food packaging are supported.</li>
+      </ul>
+
+      <h3 id="ch4-manual">4.2 Manual Entry</h3>
+      <p>Use manual entry when a barcode cannot be scanned or the product is not in the database.</p>
+      <ol class="steps-list">
+        <li>
+          <div class="step-body">
+            <strong>Tap the + button</strong>
+            Open the barcode scanner screen.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap "Enter Manually" or the keyboard icon</strong>
+            This switches from the camera view to a text input form.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Type the item name</strong>
+            Enter a clear, descriptive name (e.g., "Whole Milk", "Greek Yogurt – Strawberry").
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Set the expiration date</strong>
+            Tap the date field and use the calendar picker to select the expiry date.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>(Optional) Enter the price</strong>
+            Type the price you paid for the item.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap Save</strong>
+            The item is saved to your pantry.
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- CHAPTER 5 -->
+    <section class="doc-section" id="ch5">
+      <div class="section-label">Chapter 5</div>
+      <h2>Managing Your Pantry</h2>
+      <p>The <strong>Pantry screen</strong> (accessible from the bottom navigation bar) shows a complete list of all items in your pantry, sorted by expiry date by default.</p>
+
+      <div class="screen-label">📱 Pantry List Screen</div>
+
+      <h3 id="ch5-colors">5.1 Expiry Status Colors</h3>
+      <p>Every item in your pantry displays a color indicator that updates automatically based on today's date:</p>
+
+      <div class="status-row">
+        <div class="status-badge status-expired"><span class="status-dot"></span>Red — Already expired</div>
+        <div class="status-badge status-soon"><span class="status-dot"></span>Yellow — Expires within 7 days</div>
+        <div class="status-badge status-fresh"><span class="status-dot"></span>Green — More than 7 days remaining</div>
+      </div>
+
+      <p style="margin-top:12px;">The expiry date and a "days remaining" or "days ago" count are displayed beneath each item's name. For example:</p>
+      <ul>
+        <li><strong>3 days left</strong> — shown in yellow</li>
+        <li><strong>Expired 2 days ago</strong> — shown in red</li>
+        <li><strong>25 days left</strong> — shown in green</li>
+      </ul>
+
+      <h3 id="ch5-edit">5.2 Editing an Item</h3>
+      <p>You can update any item's name, expiry date, or price after it has been saved.</p>
+      <ol class="steps-list">
+        <li>
+          <div class="step-body">
+            <strong>Tap the item card</strong>
+            In either the Home screen or Pantry list, tap the item you want to edit.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap the Edit (pencil) icon</strong>
+            This opens the Edit Food Details screen.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Update the fields</strong>
+            Change the item name, expiry date, or price as needed.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap Save</strong>
+            Your changes are saved immediately and synced to the cloud.
+          </div>
+        </li>
+      </ol>
+
+      <h3 id="ch5-delete">5.3 Deleting an Item</h3>
+      <p>To remove an item from your pantry (e.g., after you've used it or thrown it away):</p>
+      <ol class="steps-list">
+        <li>
+          <div class="step-body">
+            <strong>Tap the item card</strong>
+            Open the item's detail view.
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Tap the Delete (trash) icon</strong>
+            A confirmation prompt appears: "Are you sure you want to delete this item?"
+          </div>
+        </li>
+        <li>
+          <div class="step-body">
+            <strong>Confirm deletion</strong>
+            Tap <strong>Delete</strong> to confirm. The item is permanently removed from your pantry.
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span class="callout-body">Deletion is permanent and cannot be undone. If you accidentally delete an item, you will need to re-add it using the scanner or manual entry.</span>
+      </div>
+    </section>
+
+    <!-- CHAPTER 6 -->
+    <section class="doc-section" id="ch6">
+      <div class="section-label">Chapter 6</div>
+      <h2>Price Tracking</h2>
+      <p>ShelfLife lets you log the price you paid for each food item. This enables you to see exactly how much money you are saving by using food before it expires — rather than throwing it away.</p>
+
+      <h3>Logging a Price</h3>
+      <p>When adding or editing an item, fill in the <strong>Price ($)</strong> field with the amount you paid. This can be the item price, or a per-unit price if you bought in bulk.</p>
+
+      <h3>Seeing Your Savings</h3>
+      <p>The total value of food currently in your pantry is shown on the Home screen. Items that you use (delete) before they expire contribute to your saved amount. Items that expire unused represent wasted money.</p>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span class="callout-body">Check the <a href="community.html" style="color:var(--primary);">Community Leaderboard</a> to see how your pantry management compares to other ShelfLife users in the community.</span>
+      </div>
+
+      <h3>Tips for Accurate Tracking</h3>
+      <ul>
+        <li>Log prices at the time of purchase while the receipt is still available.</li>
+        <li>For multi-packs (e.g., a 6-pack of yogurt), log each cup as a separate item with the per-cup price.</li>
+        <li>You can update a price at any time by editing the item.</li>
+        <li>Price is optional — you can track expiry without it.</li>
+      </ul>
+    </section>
+
+    <!-- CHAPTER 7 -->
+    <section class="doc-section" id="ch7">
+      <div class="section-label">Chapter 7</div>
+      <h2>Account Settings</h2>
+      <p>Access your account settings by tapping the <strong>Profile</strong> icon in the bottom navigation bar.</p>
+
+      <h3>Profile Information</h3>
+      <p>On the Profile screen you can view and update:</p>
+      <ul>
+        <li><strong>Display Name</strong> — The name shown on your account and (optionally) the community leaderboard.</li>
+        <li><strong>Email Address</strong> — Your sign-in email. Read-only if you signed up with Google or Apple.</li>
+        <li><strong>Birthday</strong> — Optional; used for personalization.</li>
+        <li><strong>Profile Photo</strong> — Set via your connected Google/Apple account or uploaded directly.</li>
+      </ul>
+
+      <h3>Signing Out</h3>
+      <ol class="steps-list">
+        <li><div class="step-body"><strong>Open the Profile screen</strong> via the bottom navigation bar.</div></li>
+        <li><div class="step-body"><strong>Scroll to the bottom</strong> and tap <strong>Sign Out</strong>.</div></li>
+        <li><div class="step-body"><strong>Confirm sign out</strong> — Your pantry data remains safely in the cloud and will return when you sign back in.</div></li>
+      </ol>
+
+      <h3>Deleting Your Account</h3>
+      <p>To permanently delete your account and all associated data, contact us via the GitHub repository. Account deletion removes all pantry items and personal information from our servers.</p>
+    </section>
+
+    <!-- CHAPTER 8 -->
+    <section class="doc-section" id="ch8">
+      <div class="section-label">Chapter 8</div>
+      <h2>Troubleshooting</h2>
+
+      <h3>Barcode not recognized</h3>
+      <p>If ShelfLife cannot identify a barcode:</p>
+      <ul>
+        <li>Ensure the barcode is well-lit and the camera lens is clean.</li>
+        <li>Move your phone closer or farther from the barcode (4–8 inches is optimal).</li>
+        <li>Try scanning the barcode from a slightly different angle.</li>
+        <li>If the product is still not found, use <strong>Manual Entry</strong> (Section 4.2).</li>
+      </ul>
+
+      <h3>App is not syncing</h3>
+      <p>If items you added on one device are not appearing on another:</p>
+      <ul>
+        <li>Check that both devices are signed in with the same account.</li>
+        <li>Verify your internet connection is active.</li>
+        <li>Pull down on the pantry list to force a refresh.</li>
+        <li>Sign out and sign back in to force a full sync.</li>
+      </ul>
+
+      <h3>Sign-in error</h3>
+      <p>If you encounter an error when trying to sign in:</p>
+      <ul>
+        <li>Check your internet connection.</li>
+        <li>Make sure you are using the same sign-in method as when you registered (Google vs. email).</li>
+        <li>For email sign-in, use the "Forgot password?" link to reset your password.</li>
+      </ul>
+
+      <h3>Camera permission denied</h3>
+      <p>If the barcode scanner shows a black screen or a permissions error:</p>
+      <ul>
+        <li><strong>iOS:</strong> Go to Settings → ShelfLife → Camera and enable access.</li>
+        <li><strong>Android:</strong> Go to Settings → Apps → ShelfLife → Permissions → Camera and enable access.</li>
+      </ul>
+
+      <div class="callout callout-info">
+        <span class="callout-icon">ℹ️</span>
+        <span class="callout-body">For additional help, open an issue on the <a href="https://github.com/Kevinvu029/ShelfLife" target="_blank" rel="noopener" style="color:#1976D2;">ShelfLife GitHub repository</a>.</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>ShelfLife &copy; 2026 &mdash;
+    <a href="index.html">Play Store Listing</a> ·
+    <a href="community.html">Community</a> ·
+    <a href="https://github.com/Kevinvu029/ShelfLife" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+<script>
+  // Highlight active TOC item on scroll
+  const sections = document.querySelectorAll('.doc-section');
+  const tocLinks = document.querySelectorAll('.toc-item a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(a => {
+          const parent = a.parentElement;
+          const matches = a.getAttribute('href') === '#' + id;
+          parent.classList.toggle('active', matches);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
