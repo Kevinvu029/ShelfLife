@@ -287,6 +287,8 @@ class _AccWidgetState extends State<AccWidget> with TickerProviderStateMixin {
                                           indicatorWeight: 3.0,
                                           tabs: [
                                             Tab(
+                                              key: ValueKey(
+                                                  'createAccount_ttkv'),
                                               text: 'Create Account',
                                             ),
                                             Tab(

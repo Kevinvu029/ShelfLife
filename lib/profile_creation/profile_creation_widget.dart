@@ -70,6 +70,7 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    key: ValueKey('Text_gfkm'),
                     'Lets Get Started!\nAdd a profile picture and a username!',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(

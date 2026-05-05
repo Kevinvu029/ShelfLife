@@ -66,7 +66,7 @@ void main() async {
   testWidgets('US5 - Monthly Analytics', (WidgetTester tester) async {
     _overrideOnError();
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: 'snap@chat.com', password: '1234567');
+        email: 'poop2@email.com', password: '1234567');
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
       child: const MyApp(),
@@ -121,10 +121,13 @@ void main() async {
 
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
-      child: const MyApp(),
+      child: MyApp(
+        entryPage: AccWidget(),
+      ),
     ));
     await GoogleFonts.pendingFonts();
 
+    await tester.tap(find.byKey(const ValueKey('createAccount_ttkv')));
     await tester.enterText(
         find.byKey(const ValueKey('emailAddress_Create_np8b')),
         'new_user@gmail.com');
@@ -133,6 +136,12 @@ void main() async {
     await tester.enterText(
         find.byKey(const ValueKey('confirm_password_Create_vd6p')), 'test123');
     await tester.tap(find.byKey(const ValueKey('Button_3r9y')));
+    await tester.pumpAndSettle(
+      const Duration(milliseconds: 500),
+      EnginePhase.sendSemanticsUpdate,
+      const Duration(milliseconds: 1000),
+    );
+    expect(find.byKey(const ValueKey('Text_gfkm')), findsWidgets);
   });
 }
 
