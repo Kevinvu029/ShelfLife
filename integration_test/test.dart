@@ -63,6 +63,59 @@ void main() async {
     expect(find.byKey(const ValueKey('Text_9l9l')), findsWidgets);
   });
 
+  testWidgets('MissingFoodInfo', (WidgetTester tester) async {
+    _overrideOnError();
+
+    await tester.pumpWidget(ChangeNotifierProvider(
+      create: (context) => FFAppState(),
+      child: MyApp(
+        entryPage: AccWidget(),
+      ),
+    ));
+    await GoogleFonts.pendingFonts();
+
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('login_kwgs')));
+    await tester.pump(kDoubleTapMinTime);
+    await tester.tap(find.byKey(const ValueKey('login_kwgs')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('emailAddress_eqtz')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.enterText(
+        find.byKey(const ValueKey('emailAddress_eqtz')), 'poop2@email.com');
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('password_lsms')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.enterText(
+        find.byKey(const ValueKey('password_lsms')), '1234567');
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('Button_by2i')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.descendant(
+      of: find.byKey(const ValueKey('NavBar_tg10')),
+      matching: find.byKey(const ValueKey('IconButton_i0q3')),
+    ));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('itemNameField_iavf')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.enterText(
+        find.byKey(const ValueKey('itemNameField_iavf')), 'Muffin');
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.enterText(
+        find.byKey(const ValueKey('priceField_c0xx')), '4.99');
+    FocusManager.instance.primaryFocus?.unfocus();
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    await tester.tap(find.byKey(const ValueKey('addFoodButton_5afu')));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+    expect(
+        find.text(
+            'PLEASE FILL OUT ALL SECTIONS AND SELECT A DATE BEFORE CLICKING \"Add Food!\"'),
+        findsWidgets);
+  });
+
   testWidgets('US5 - Monthly Analytics', (WidgetTester tester) async {
     _overrideOnError();
     await FirebaseAuth.instance.signInWithEmailAndPassword(
