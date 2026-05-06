@@ -69,10 +69,13 @@ void main() async {
         email: 'poop2@email.com', password: '1234567');
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
-      child: const MyApp(),
+      child: MyApp(
+        entryPage: HomePageWidget(),
+      ),
     ));
     await GoogleFonts.pendingFonts();
 
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.descendant(
       of: find.byKey(const ValueKey('NavBar_tg10')),
       matching: find.byKey(const ValueKey('IconButton_i0q3')),
@@ -81,16 +84,17 @@ void main() async {
     await tester.enterText(
         find.byKey(const ValueKey('itemNameField_iavf')), 'Pastry and Matcha');
     FocusManager.instance.primaryFocus?.unfocus();
-    await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.enterText(
         find.byKey(const ValueKey('priceField_c0xx')), '12.69');
     FocusManager.instance.primaryFocus?.unfocus();
-    await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byKey(const ValueKey('expDateButton_yr7q')));
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.text('20'));
-    await tester.pumpAndSettle(const Duration(milliseconds: 2000));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.text('OK'));
+    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byKey(const ValueKey('addFoodButton_5afu')));
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.descendant(
