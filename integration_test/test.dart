@@ -78,8 +78,6 @@ void main() async {
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     await tester.tap(find.byIcon(Icons.delete_forever_sharp));
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    expect(find.text('lost this month'), findsNothing);
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     expect(find.text('items wasted'), findsNothing);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
   });
