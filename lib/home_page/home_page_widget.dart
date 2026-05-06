@@ -334,6 +334,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               snapshot.data!;
 
                                           return ListView.separated(
+                                            key: ValueKey('ListView_g7hw'),
                                             padding: EdgeInsets.zero,
                                             shrinkWrap: true,
                                             scrollDirection: Axis.vertical,

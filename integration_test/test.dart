@@ -76,7 +76,7 @@ void main() async {
     await GoogleFonts.pendingFonts();
 
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.byIcon(Icons.delete_forever_sharp));
+    expect(find.byKey(const ValueKey('ListView_g7hw')), findsWidgets);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     expect(find.text('items wasted'), findsNothing);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
