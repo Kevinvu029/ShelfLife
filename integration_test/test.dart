@@ -78,7 +78,7 @@ void main() async {
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
     expect(find.byKey(const ValueKey('ListView_g7hw')), findsWidgets);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    expect(find.text('items wasted'), findsNothing);
+    expect(find.text('items wasted'), findsOneWidget);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
   });
 
