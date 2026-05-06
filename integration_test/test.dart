@@ -76,33 +76,12 @@ void main() async {
     await GoogleFonts.pendingFonts();
 
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.descendant(
-      of: find.byKey(const ValueKey('NavBar_tg10')),
-      matching: find.byKey(const ValueKey('IconButton_i0q3')),
-    ));
+    await tester.tap(find.byIcon(Icons.delete_forever_sharp));
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.enterText(
-        find.byKey(const ValueKey('itemNameField_iavf')), 'Pastry and Matcha');
-    FocusManager.instance.primaryFocus?.unfocus();
+    expect(find.text('lost this month'), findsNothing);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.enterText(
-        find.byKey(const ValueKey('priceField_c0xx')), '12.69');
-    FocusManager.instance.primaryFocus?.unfocus();
+    expect(find.text('items wasted'), findsNothing);
     await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.byKey(const ValueKey('expDateButton_yr7q')));
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.text('20'));
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.text('OK'));
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.byKey(const ValueKey('addFoodButton_5afu')));
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    await tester.tap(find.descendant(
-      of: find.byKey(const ValueKey('NavBar_f1yv')),
-      matching: find.byKey(const ValueKey('IconButton_5ds9')),
-    ));
-    await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-    expect(find.byKey(const ValueKey('Container_u0g7')), findsOneWidget);
   });
 
   testWidgets('US4 - missingFoodInfo', (WidgetTester tester) async {

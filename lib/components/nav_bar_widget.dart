@@ -80,7 +80,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     FlutterFlowIconButton(
-                      key: ValueKey('IconButton_5ds9'),
                       borderColor: Colors.transparent,
                       borderRadius: 30.0,
                       borderWidth: 1.0,
@@ -139,7 +138,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         Align(
                           alignment: AlignmentDirectional(-0.05, 0.0),
                           child: FlutterFlowIconButton(
-                            key: ValueKey('IconButton_i0q3'),
                             borderColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                             borderRadius: 25.0,

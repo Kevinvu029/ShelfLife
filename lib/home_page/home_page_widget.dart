@@ -455,7 +455,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ].divide(SizedBox(width: 7.0)),
                                   ),
                                   Container(
-                                    key: ValueKey('Container_u0g7'),
                                     width: double.infinity,
                                     height: 65.0,
                                     decoration: BoxDecoration(
@@ -706,9 +705,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         child: wrapWithModel(
                           model: _model.navBarModel,
                           updateCallback: () => safeSetState(() {}),
-                          child: NavBarWidget(
-                            key: ValueKey('NavBar_tg10'),
-                          ),
+                          child: NavBarWidget(),
                         ),
                       ),
                     ),

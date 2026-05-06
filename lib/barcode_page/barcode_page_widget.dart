@@ -552,7 +552,6 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                               ),
                             ),
                             FFButtonWidget(
-                              key: ValueKey('expDateButton_yr7q'),
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'BARCODE_PAGE_PAGE_expDateButton_ON_TAP');
@@ -966,9 +965,7 @@ class _BarcodePageWidgetState extends State<BarcodePageWidget> {
                 child: wrapWithModel(
                   model: _model.navBarModel,
                   updateCallback: () => safeSetState(() {}),
-                  child: NavBarWidget(
-                    key: ValueKey('NavBar_f1yv'),
-                  ),
+                  child: NavBarWidget(),
                 ),
               ),
             ],
